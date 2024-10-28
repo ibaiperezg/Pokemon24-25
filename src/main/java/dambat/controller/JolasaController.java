@@ -313,11 +313,6 @@ public class JolasaController {
         startGengarAnimation();
         startHaunterAnimation();
     }
-
-    public void setNombre(String nombre) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setNombre'");
-    }
     
 
 }
