@@ -5,6 +5,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.NombreController" spacing="10" alignment="center">
-    <TextField fx:id="nombreField" promptText="Ingrese su nombre" />
-    <Button text="Guardar Nombre" onAction="#guardarNombre" />
+    <TextField fx:id="jolasaField" promptText="Sartu zure izena" />
+    <Button text="Gorde Izena" onAction="#gordeIzena" />
 </VBox>
