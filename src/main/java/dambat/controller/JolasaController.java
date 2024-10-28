@@ -4,6 +4,7 @@ import javafx.scene.Group;
 // Beharrezko inportazioak
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -67,6 +68,8 @@ public class JolasaController {
             { 5, 0 }, { 6, 0 }, { 6, 1 }, { 6, 2 }, { 6, 3 }, { 6, 4 }, { 5, 4 }, { 5, 5 }, { 5, 4 }, { 4, 5 },
             { 3, 5 }, { 2, 5 }, { 2, 4 }, { 1, 4 }, { 0, 4 }, { 0, 5 }, { 0, 6 }, { 0, 7 }, { 1, 7 }, { 2, 7 },
             { 3, 7 }, { 4, 7 }, { 5, 7 }, { 6, 7 }, { 7, 7 } };
+
+    private String nombre;
     private void switchToSecondary() throws IOException {
                 App.setRoot("hasiera");
     }
@@ -313,11 +316,11 @@ public class JolasaController {
         startGengarAnimation();
         startHaunterAnimation();
     }
+private Label displayName; // Assuming you have a Label to show the name
 
+   
     public void setNombre(String nombre) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setNombre'");
+        this.nombre = nombre;
+        displayName.setText("Nombre: " + nombre); // Update the label with the received name
     }
-    
-
 }

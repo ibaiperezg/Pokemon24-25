@@ -12,8 +12,7 @@
 <?import dambat.model.Arbusto?>
 <?import dambat.model.Pikachu?>
 <!-- prefHeight="150.0" prefWidth="374.0"-->
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
-fx:controller="dambat.controller.JolasaController"  styleClass="arrunta" >
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dambat.controller.JolasaController"  styleClass="arrunta" >
    <children>
       
       <GridPane fx:id="borrokaEremua"  >
