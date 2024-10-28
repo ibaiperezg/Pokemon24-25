@@ -37,4 +37,9 @@ public class NombreController {
             e.printStackTrace();
         }
     }
+
+    public void movePikachu(double moveDelta, double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'movePikachu'");
+    }
 }
