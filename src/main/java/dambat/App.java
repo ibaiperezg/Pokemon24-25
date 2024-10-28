@@ -26,6 +26,7 @@ public class App extends Application {
         // FXML fitxategitik interfazea kargatu
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/escenaNombre.fxml"));
         Parent root = fxmlLoader.load();
+        
         // FXML-tik kargatu ondoren kontrolatzailea lortu
         controller = fxmlLoader.getController();
 
