@@ -71,8 +71,8 @@ public class JolasaController {
 
     private String nombre;
     private void switchToSecondary() throws IOException {
-                App.setRoot("hasiera");
-    }
+        App.setRoot("hasiera");
+}
 
     // Erremintaren bideak erakutsi
     public void displayPath() {
@@ -316,11 +316,12 @@ public class JolasaController {
         startGengarAnimation();
         startHaunterAnimation();
     }
-private Label displayName; // Assuming you have a Label to show the name
+
 
    
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-        displayName.setText("Nombre: " + nombre); // Update the label with the received name
-    }
+public void setNombre(String nombre) {
+    this.nombre = nombre;
+    System.out.println("Nombre set in JolasaController: " + nombre); // Debugging line
+    // Optionally, use `nombre` to update any UI elements in `Jolasa.fxml`
+}
 }

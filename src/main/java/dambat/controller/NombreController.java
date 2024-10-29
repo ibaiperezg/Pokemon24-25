@@ -1,6 +1,8 @@
 package dambat.controller;
 
 import java.io.IOException;
+
+import dambat.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,28 +20,36 @@ public class NombreController {
     @FXML
     private Button guardarButton;
 
+    
     @FXML
-    public void guardarNombre() {
-        String nombre = nombreField.getText();
-        System.out.println("Nombre ingresado: " + nombre); // Debugging line
-    
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Jolasa.fxml"));
-            Parent root = loader.load();
-    
-            JolasaController jolasaController = loader.getController();
-            jolasaController.setNombre(nombre);
-    
-            Stage stage = (Stage) guardarButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Jolasa");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading the scene: " + e.getMessage());
-            alert.showAndWait();
-        }
+public void guardarNombre() {
+    String nombre = nombreField.getText();
+    System.out.println("ZURE IZENA: " + nombre); // Debugging line
+
+    try {
+        System.out.println("Attempting to load Jolasa.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Jolasa.fxml"));
+
+        Parent root = loader.load();
+
+        // Check if the loader successfully loaded the controller
+        JolasaController jolasaController = loader.getController();
+        System.out.println("Controller loaded: " + (jolasaController != null));
+        jolasaController.setNombre(nombre);
+
+        Stage stage = (Stage) guardarButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Jolasa");
+        stage.show();
+        System.out.println("Scene switched to Jolasa.fxml");
+    } catch (IOException e) {
+        e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading the scene: " + e.getMessage());
+        alert.showAndWait();
     }
+}
+
+
     
 
     
