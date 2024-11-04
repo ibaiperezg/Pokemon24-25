@@ -2,7 +2,6 @@ package dambat;
 
 
 import java.io.IOException;
-
 import dambat.controller.NombreController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

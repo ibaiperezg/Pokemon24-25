@@ -28,7 +28,7 @@ public void guardarNombre() {
 
     try {
         System.out.println("Attempting to load Jolasa.fxml");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Jolasa.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/Jolasa.fxml"));
 
         Parent root = loader.load();
 
@@ -47,6 +47,7 @@ public void guardarNombre() {
         Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading the scene: " + e.getMessage());
         alert.showAndWait();
     }
+    
 }
 
 
@@ -58,5 +59,12 @@ public void guardarNombre() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'movePikachu'");
     }
-
+@FXML
+    private void hasi() {
+        try {
+            App.setRoot("Jolasa");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
