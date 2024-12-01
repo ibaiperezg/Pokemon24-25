@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import dambat.controller.FinalController;
 import dambat.controller.NombreController;
-import dambat.controller.finalController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,13 +19,13 @@ public class App extends Application {
     // Eszena aplikazioa
     private static Scene scene;
     // Kontrolatzailea aplikazioa
-    private FinalController controller;
+    private NombreController controller;
 
     // Aplikazioa hasi beharreko nagusiki metodoa
     @Override
     public void start(Stage stage) throws IOException {
         // FXML fitxategitik interfazea kargatu
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/escenaFinal.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/escenaNombre.fxml"));
         Parent root = fxmlLoader.load();
         
         // FXML-tik kargatu ondoren kontrolatzailea lortu
