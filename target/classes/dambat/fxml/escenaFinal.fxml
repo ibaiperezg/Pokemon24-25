@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: ;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dambat.controller.FinalController">
+   <children>
+      <!-- Fondo -->
+      <ImageView fitHeight="417.0" fitWidth="589.0" pickOnBounds="true" preserveRatio="true" style="-fx-fit-width: 600; -fx-fit-height: 480;">
+         <image>
+            <Image url="@../img/fondoFinal.jpg" />
+         </image>
+      </ImageView>
+
+      <!-- Título -->
+      <Label layoutX="200.0" layoutY="50.0" text="PUNTUAZIOA" style="-fx-font-size: 36px; -fx-text-fill: white; -fx-font-weight: bold;" />
+
+      <!-- Puntuación -->
+      <Label layoutX="150.0" layoutY="150.0" text="X: 7 PUNTU" fx:id="player1Score" style="-fx-font-size: 24px; -fx-text-fill: yellow;" />
+
+      <!-- Botones -->
+      <Button layoutX="100.0" layoutY="300.0" text="Berriro jolastu" fx:id="restartButton" onAction="#restartGame" style="-fx-font-size: 16px;" />
+      <Button layoutX="400.0" layoutY="300.0" text="Irten" fx:id="exitButton" onAction="#exitGame" style="-fx-font-size: 16px;" />
+   </children>
+</Pane>
