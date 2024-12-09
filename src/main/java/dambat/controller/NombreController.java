@@ -55,10 +55,7 @@ public void guardarNombre() {
 
     
 
-    public void movePikachu(double moveDelta2, double moveDelta) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'movePikachu'");
-    }
+    
 @FXML
     private void hasi() {
         try {

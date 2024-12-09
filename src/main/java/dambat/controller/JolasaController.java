@@ -1,21 +1,7 @@
 package dambat.controller;
 
-import javafx.scene.Group;
-// Beharrezko inportazioak
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
-import javafx.util.Duration;
+import java.io.IOException;
+
 import dambat.App;
 import dambat.Config;
 import dambat.model.Arbusto;
@@ -25,11 +11,21 @@ import dambat.model.Gengar;
 import dambat.model.Haunter;
 import dambat.model.Pikachu;
 import dambat.model.Terrain;
-import java.io.IOException;
-import java.io.InputStream;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-
-
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 // Jolasaren kontrolatzailea
 public class JolasaController {
@@ -70,9 +66,10 @@ public class JolasaController {
             { 3, 7 }, { 4, 7 }, { 5, 7 }, { 6, 7 }, { 7, 7 } };
 
     private String nombre;
+
     private void switchToSecondary() throws IOException {
         App.setRoot("hasiera");
-}
+    }
 
     // Erremintaren bideak erakutsi
     public void displayPath() {
@@ -146,7 +143,7 @@ public class JolasaController {
             return;
         }
 
-        int newCellX = currentX + 1; 
+        int newCellX = currentX + 1;
 
         if (newCellX >= 0 && newCellX <= 7) {
             GridPane.setColumnIndex(haunter, newCellX);
@@ -201,16 +198,16 @@ public class JolasaController {
         // Pikachu posizioa lortu
         Integer currentX = GridPane.getColumnIndex(pikachu);
         Integer currentY = GridPane.getRowIndex(pikachu);
-    
+
         // Posizioa balidatzeko
         if (currentX == null || currentY == null) {
             return; // Posizioa nula bada, irten
         }
-    
+
         // Mugimendua egin
         int newCellX = currentX + (int) Math.signum(deltaX);
         int newCellY = currentY + (int) Math.signum(deltaY);
-    
+
         // Bidearen barruan dagoen celda bila
         if (newCellX >= 0 && newCellX < Config.BOARD_SIZE && newCellY >= 0 && newCellY < Config.BOARD_SIZE) {
             for (int i = 0; i < path.length; i++) {
@@ -218,17 +215,17 @@ public class JolasaController {
                     // Bidearen celdarekin bat dator, pikachu mugitu
                     GridPane.setColumnIndex(pikachu, newCellX);
                     GridPane.setRowIndex(pikachu, newCellY);
-                    
-                    //Pikachu azkenengo kasillan dagoen begiratzen du (7, 7)
+
+                    // Pikachu azkenengo kasillan dagoen begiratzen du (7, 7)
                     if (newCellX == 7 && newCellY == 7) {
-                        boolean pikachuReachedEscalera=true;
-                        
+                        boolean pikachuReachedEscalera = true;
+
                         if (!pikachuReachedEscalera) {
                             showPikapikaImage();
-                            pikachuReachedEscalera = true; 
+                            pikachuReachedEscalera = true;
                         }
                     }
-    
+
                     // Kolisioa begiratzen du
                     checkCollision();
                     return; // Mugimendua amaitu, irten
@@ -236,12 +233,10 @@ public class JolasaController {
             }
         }
     }
-    
-    
+
     private void createPikapikaStage() {
         pikapikaStage = new Stage();
         pikapikaStage.initModality(Modality.APPLICATION_MODAL);
-        
 
         StackPane pikapikaPane = new StackPane();
         Scene pikapikaScene = new Scene(pikapikaPane, Color.TRANSPARENT);
@@ -252,16 +247,14 @@ public class JolasaController {
 
     private void showPikapikaImage() {
         try {
-           
+
             Scene currentScene = borrokaEremua.getScene();
             Group root = (Group) currentScene.getRoot();
 
-          
             StackPane pikapikaPane = (StackPane) pikapikaStage.getScene().getRoot();
             pikapikaPane.getChildren().clear(); // Limpiar cualquier contenido anterior
             pikapikaPane.getChildren().add(new ImageView(new Image("pikapika.png")));
 
-           
             pikapikaStage.setFullScreen(true);
             pikapikaStage.show();
         } catch (Exception e) {
@@ -269,8 +262,6 @@ public class JolasaController {
         }
     }
 
-    
-    
     private void checkCollision() throws Exception {
         if (pikachu.getBoundsInParent().intersects(duskull.getBoundsInParent()) ||
                 pikachu.getBoundsInParent().intersects(gengar.getBoundsInParent()) ||
@@ -281,10 +272,8 @@ public class JolasaController {
 
             resetGame();
 
-          
-    }
         }
-    
+    }
 
     @FXML
 
@@ -294,34 +283,64 @@ public class JolasaController {
     }
 
     private void resetGame() {
-        pikapikaStage.hide(); 
-    
+        pikapikaStage.hide();
+
         duskull.duskullTimeline.stop();
         gengarTimeline.stop();
         haunterTimeline.stop();
-    
+
         GridPane.setColumnIndex(pikachu, 0);
         GridPane.setRowIndex(pikachu, 0);
-    
+
         GridPane.setColumnIndex(duskull, 2);
         GridPane.setRowIndex(duskull, 1);
-    
+
         GridPane.setColumnIndex(gengar, 4);
         GridPane.setRowIndex(gengar, 4);
-    
+
         GridPane.setColumnIndex(haunter, 5);
         GridPane.setRowIndex(haunter, 2);
-    
+
         duskull.defineDuskullAnimation();
         startGengarAnimation();
         startHaunterAnimation();
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+        System.out.println("Nombre set in JolasaController: " + nombre); // Debugging line
+        // Optionally, use `nombre` to update any UI elements in `Jolasa.fxml`
+    }
 
-   
-public void setNombre(String nombre) {
-    this.nombre = nombre;
-    System.out.println("Nombre set in JolasaController: " + nombre); // Debugging line
-    // Optionally, use `nombre` to update any UI elements in `Jolasa.fxml`
-}
+    // Teklatu ekintzak kudeatzeko metodoa
+    private void handleKeyPress(KeyEvent event) throws Exception {
+        // Sakatutako tekla lortu
+        KeyCode keyCode = event.getCode();
+        // Mugimenduaren neurria zehaztu
+        double moveDelta = 10;
+
+        // Kontrolatzailea ez bada null, bere metodoak erabili ahal izateko
+
+        // Sakatutako tekla pantailan bistaratu
+        System.out.println("Sakatutako tekla: " + keyCode);
+        // Sakatutako tekla arabera ekintzak egin
+        switch (keyCode) {
+            case W:
+                movePikachu(0, -moveDelta); // Goranzko mugimendua
+                break;
+            case A:
+                movePikachu(-moveDelta, 0); // Ezkerreko mugimendua
+                break;
+            case S:
+                movePikachu(0, moveDelta); // Beheranzko mugimendua
+                break;
+            case D:
+                movePikachu(moveDelta, 0); // Eskumako mugimendua
+                break;
+            default:
+                // Beste tekla batzuetarako ezer egin
+                break;
+
+        }
+    }
 }
