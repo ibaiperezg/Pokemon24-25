@@ -22,6 +22,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,7 +34,10 @@ public class JolasaController {
     // GridPane elementua FXML-tik kargatzeko
     @FXML
     public GridPane borrokaEremua;
-
+    @FXML
+    public VBox jolaseremua;
+    
+    
     // Pikachu objetua
     private Pikachu pikachu;
     private Duskull duskull;
@@ -43,6 +47,7 @@ public class JolasaController {
     private Haunter haunter;
     private Timeline haunterTimeline;
     private Escalera escalera;
+    private boolean IstouchinEscalera = false;
 
     // Inizializazioa
     @FXML
@@ -56,8 +61,19 @@ public class JolasaController {
         createAndPlaceHaunter();
         startHaunterAnimation();
         createEscalera();
+        jolaseremua.setOnKeyPressed(Event->{
+            try {
+                handleKeyPress(Event);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }); 
 
+        
     }
+
+    
 
     // Erremintaren bidezko bideen konfigurazioa
     int[][] path = { { 0, 0 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, { 2, 2 }, { 3, 2 }, { 3, 1 }, { 3, 0 }, { 4, 0 },
@@ -343,4 +359,9 @@ public class JolasaController {
 
         }
     }
+
 }
+        
+            
+    
+
