@@ -14,7 +14,7 @@
 <!-- prefHeight="150.0" prefWidth="374.0"-->
 <VBox fx:id="jolaseremua" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dambat.controller.JolasaController"  styleClass="arrunta" >
    <children>
-      
+      <Button layoutX="450.0" layoutY="287.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="134.0" text="HASI" onAction="#jolastenHasi"></Button>
       <GridPane fx:id="borrokaEremua"  >
          <children>
              <Terrain GridPane.rowIndex="0" GridPane.columnIndex="0" ></Terrain>

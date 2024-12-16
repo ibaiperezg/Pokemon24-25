@@ -57,11 +57,19 @@ public class JolasaController {
         createAndPlaceDuskull();
         createPikapikaStage();
         createAndPlaceGengar();
-        startGengarAnimation();
+        
         createAndPlaceHaunter();
-        startHaunterAnimation();
         createEscalera();
-        jolaseremua.setOnKeyPressed(Event->{
+            
+    }
+    @FXML
+    public void jolastenHasi(){
+        startGengarAnimation();
+        startHaunterAnimation();
+
+        //Eszenan gauden bitartean, teklatua entzuten jarri
+        Scene unekoEszena =borrokaEremua.getScene();
+        unekoEszena.setOnKeyPressed(Event->{
             try {
                 handleKeyPress(Event);
             } catch (Exception e) {
@@ -69,11 +77,7 @@ public class JolasaController {
                 e.printStackTrace();
             }
         }); 
-
-        
     }
-
-    
 
     // Erremintaren bidezko bideen konfigurazioa
     int[][] path = { { 0, 0 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, { 2, 2 }, { 3, 2 }, { 3, 1 }, { 3, 0 }, { 4, 0 },
@@ -121,6 +125,7 @@ public class JolasaController {
     public void createAndPlacePikachu() {
         pikachu = new Pikachu();
         borrokaEremua.add(pikachu, 0, 0);
+        
     }
 
     public void createAndPlaceDuskull() {
