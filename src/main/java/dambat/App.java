@@ -28,12 +28,14 @@ public class App extends Application {
 
         // Eszena kargatu FXML-tik lortu den erroretik
         scene = new Scene(root);
+
         // Teklatu ekintzak kudeatu eszenan
         
 
         // Eszena konfiguratu eta bistaratu
         stage.setScene(scene);
         stage.show();
+        
     }
 
    
@@ -46,6 +48,7 @@ public class App extends Application {
 
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
+        
     }
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("fxml/" + fxml + ".fxml"));
