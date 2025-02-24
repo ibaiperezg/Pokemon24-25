@@ -20,23 +20,19 @@ public class App extends Application {
     // Aplikazioa hasi beharreko nagusiki metodoa
     @Override
     public void start(Stage stage) throws IOException {
-        // FXML fitxategitik interfazea kargatu
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/escenaNombre.fxml"));
         Parent root = fxmlLoader.load();
-        
-       
-
-        // Eszena kargatu FXML-tik lortu den erroretik
-        scene = new Scene(root);
-
-        // Teklatu ekintzak kudeatu eszenan
-        
-
-        // Eszena konfiguratu eta bistaratu
+    
+        // Especifica explícitamente un tamaño inicial adecuado
+        scene = new Scene(root, 800, 600); // ajusta estos valores según tu necesidad
+    
         stage.setScene(scene);
+        stage.sizeToScene(); // ajusta automáticamente según contenido
+        stage.setResizable(true); // permitir que el usuario pueda redimensionar
         stage.show();
-        
     }
+    
+
 
    
 

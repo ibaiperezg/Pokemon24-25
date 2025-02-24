@@ -21,34 +21,38 @@ public class NombreController {
     private Button guardarButton;
 
     
+  
     @FXML
-public void guardarNombre() {
-    String nombre = nombreField.getText();
-    System.out.println("ZURE IZENA: " + nombre); // Debugging line
-
-    try {
-        System.out.println("Attempting to load Jolasa.fxml");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/Jolasa.fxml"));
-
-        Parent root = loader.load();
-
-        // Check if the loader successfully loaded the controller
-        JolasaController jolasaController = loader.getController();
-        System.out.println("Controller loaded: " + (jolasaController != null));
-        jolasaController.setNombre(nombre);
-
-        Stage stage = (Stage) guardarButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Jolasa");
-        stage.show();
-        System.out.println("Scene switched to Jolasa.fxml");
-    } catch (IOException e) {
-        e.printStackTrace();
-        Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading the scene: " + e.getMessage());
-        alert.showAndWait();
+    public void guardarNombre() {
+        String nombre = nombreField.getText();
+        System.out.println("ZURE IZENA: " + nombre); // Debugging line
+    
+        try {
+            System.out.println("Attempting to load Jolasa.fxml");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/Jolasa.fxml"));
+    
+            Parent root = loader.load();
+    
+            JolasaController jolasaController = loader.getController();
+            System.out.println("Controller loaded: " + (jolasaController != null));
+            jolasaController.setNombre(nombre);
+    
+            Stage stage = (Stage) guardarButton.getScene().getWindow();
+            
+            // Establecer explícitamente el tamaño deseado
+            Scene scene = new Scene(root, 1280, 720); // ajusta según necesidades
+            stage.setScene(scene);
+            stage.setTitle("Jolasa");
+            stage.show();
+            
+            System.out.println("Scene switched to Jolasa.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading the scene: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
     
-}
 
 
     

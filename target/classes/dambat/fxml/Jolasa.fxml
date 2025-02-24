@@ -1,27 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import dambat.model.Terrain?>
 <?import dambat.model.Arbusto?>
-<?import dambat.model.Pikachu?>
-<!-- prefHeight="150.0" prefWidth="374.0"-->
-<VBox fx:id="jolaseremua" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dambat.controller.JolasaController"  styleClass="arrunta" >
-   <children>
-      <Button layoutX="450.0" layoutY="287.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="134.0" text="HASI" onAction="#jolastenHasi"></Button>
-      <GridPane fx:id="borrokaEremua"  >
-         <children>
-             <Terrain GridPane.rowIndex="0" GridPane.columnIndex="0" ></Terrain>
-             <Arbusto GridPane.rowIndex="1" GridPane.columnIndex="0"></Arbusto>
-         
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="dambat.controller.JolasaController"
+           style="-fx-background-color: linear-gradient(to bottom right,rgb(178, 222, 17),rgb(78, 4, 78)); -fx-padding: 30;">
+
+
+
+    <VBox fx:id="jolaseremua" alignment="CENTER" spacing="25"
+          style="-fx-background-color: rgba(255,255,255,0.85);
+                 -fx-padding: 30;
+                 -fx-spacing: 20;
+                 -fx-border-radius: 20;
+                 -fx-background-radius: 20;
+                 -fx-border-color: #90a4ae;
+                 -fx-border-width: 3;">
+
+        <effect>
+            <DropShadow radius="15.0" color="#455a64" offsetX="5" offsetY="5" />
+        </effect>
+
+        <children>
+            <Button text="HASI" onAction="#jolastenHasi" mnemonicParsing="false"
+                    style="-fx-background-color: linear-gradient(to right, #43a047, #66bb6a);
+                           -fx-text-fill: white;
+                           -fx-font-size: 20px;
+                           -fx-font-weight: bold;
+                           -fx-cursor: hand;
+                           -fx-background-radius: 30;
+                           -fx-border-radius: 30;
+                           -fx-padding: 10 20;"
+                    prefHeight="60.0" maxWidth="Infinity">
+                <effect>
+                    <DropShadow radius="6.0" color="#2e7d32" offsetY="3" />
+                </effect>
+            </Button>
+
+            <GridPane fx:id="borrokaEremua" hgap="0" vgap="0" alignment="CENTER"
+                      style="-fx-background-color: rgba(255,255,255,0.9);
+                             -fx-padding: 20;
+                             -fx-border-radius: 15;
+                             -fx-background-radius: 15;
+                             -fx-border-color: #b0bec5;
+                             -fx-border-width: 2;">
+
+                <effect>
+                    <DropShadow radius="8.0" color="#78909c" offsetY="4" />
+                </effect>
+
+                <children>
+                    <Terrain GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                    <Arbusto GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                </children>
+            </GridPane>
         </children>
-      </GridPane>
-      <!-- <TextField fx:id="textFieldZenbakia" /> -->
-   </children>
-</VBox>
+    </VBox>
+</StackPane>
