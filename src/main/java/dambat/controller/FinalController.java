@@ -48,7 +48,7 @@ public class FinalController {
     private void restartGame() {
         try {
             // "escenaNombre.fxml" fitxategia kargatu
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/Jolasa.fxml"));// Zure proiektuaren arabera bidea aldatu
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Jolasa.fxml"));// Zure proiektuaren arabera bidea aldatu
             Parent root = loader.load();
 
             // Eszena berriko kontroladorea lortu

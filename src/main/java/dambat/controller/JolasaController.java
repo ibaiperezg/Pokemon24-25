@@ -54,25 +54,26 @@ public class JolasaController {
 
     // Inizializazioa
     @FXML
-    protected void initialize() {
-        displayPath();
-        createAndPlacePikachu();
-        createAndPlaceDuskull();
-        createPikapikaStage();
-        createAndPlaceGengar();
-
-        createAndPlaceHaunter();
-        createEscalera();
-        Node nombreField = new Node() {
-        };
-        FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), nombreField);
+protected void initialize() {
+    displayPath();
+    createAndPlacePikachu();
+    createAndPlaceDuskull();
+    createPikapikaStage();
+    createAndPlaceGengar();
+    createAndPlaceHaunter();
+    createEscalera();
+    /* if (borrokaEremua != null) { 
+        FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), borrokaEremua);
         fadeAnimation.setFromValue(0.5);
         fadeAnimation.setToValue(1.0);
-        fadeAnimation.setCycleCount(FadeTransition.INDEFINITE); // CONFIGURACIÓN EN JAVA
+        fadeAnimation.setCycleCount(FadeTransition.INDEFINITE);
         fadeAnimation.setAutoReverse(true);
         fadeAnimation.play();
+    } else {
+        System.out.println("⚠️ ADVERTENCIA: `borrokaEremua` es NULL. No se aplicará FadeTransition.");
+    } */
+}
 
-    }
 
     @FXML
     public void jolastenHasi() {
