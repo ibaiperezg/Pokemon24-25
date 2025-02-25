@@ -20,6 +20,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -40,7 +41,8 @@ public class JolasaController {
     public GridPane borrokaEremua;
     @FXML
     public VBox jolaseremua;
-
+    @FXML
+    private Label nombreLabel;
     // Pikachu objetua
     private Pikachu pikachu;
     private Duskull duskull;
@@ -54,26 +56,30 @@ public class JolasaController {
 
     // Inizializazioa
     @FXML
-protected void initialize() {
-    displayPath();
-    createAndPlacePikachu();
-    createAndPlaceDuskull();
-    createPikapikaStage();
-    createAndPlaceGengar();
-    createAndPlaceHaunter();
-    createEscalera();
-    /* if (borrokaEremua != null) { 
-        FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), borrokaEremua);
-        fadeAnimation.setFromValue(0.5);
-        fadeAnimation.setToValue(1.0);
-        fadeAnimation.setCycleCount(FadeTransition.INDEFINITE);
-        fadeAnimation.setAutoReverse(true);
-        fadeAnimation.play();
-    } else {
-        System.out.println("⚠️ ADVERTENCIA: `borrokaEremua` es NULL. No se aplicará FadeTransition.");
-    } */
-}
-
+    protected void initialize() {
+        displayPath();
+        createAndPlacePikachu();
+        createAndPlaceDuskull();
+        createPikapikaStage();
+        createAndPlaceGengar();
+        createAndPlaceHaunter();
+        createEscalera();
+        /*
+         * if (borrokaEremua != null) {
+         * FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5),
+         * borrokaEremua);
+         * fadeAnimation.setFromValue(0.5);
+         * fadeAnimation.setToValue(1.0);
+         * fadeAnimation.setCycleCount(FadeTransition.INDEFINITE);
+         * fadeAnimation.setAutoReverse(true);
+         * fadeAnimation.play();
+         * } else {
+         * System.out.
+         * println("⚠️ ADVERTENCIA: `borrokaEremua` es NULL. No se aplicará FadeTransition."
+         * );
+         * }
+         */
+    }
 
     @FXML
     public void jolastenHasi() {
@@ -393,9 +399,9 @@ protected void initialize() {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
-        System.out.println("Nombre set in JolasaController: " + nombre); // Debugging line
-        // Optionally, use `nombre` to update any UI elements in `Jolasa.fxml`
+        if (nombreLabel != null) {
+            nombreLabel.setText("Hola, " + nombre + "!");
+        }
     }
 
     // Teklatu ekintzak kudeatzeko metodoa
@@ -429,5 +435,6 @@ protected void initialize() {
 
         }
     }
+
 
 }

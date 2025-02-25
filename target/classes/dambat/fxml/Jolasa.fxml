@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -18,6 +20,21 @@
                  -fx-border-width: 3;">
 
         <children>
+         
+            <Label fx:id="nombreLabel" layoutX="50" layoutY="20" text="Kaixo, !"
+                style="-fx-font-size: 48px;
+              -fx-text-fill: #ff0000; /* Rojo sangre */
+              -fx-font-weight: bold;
+              -fx-background-color: rgba(0, 0, 0, 0.7);
+              -fx-padding: 10;
+              -fx-border-color: darkred;
+              -fx-border-width: 3;
+              -fx-border-radius: 10;">
+                <effect>
+                    <DropShadow radius="10.0" color="black" offsetX="5" offsetY="5" />
+                </effect>
+            </Label>
+
             <Button text="HASI" fx:id="startButton" onAction="#jolastenHasi" mnemonicParsing="false"
                     style="-fx-background-color: darkred;
                            -fx-text-fill: white;

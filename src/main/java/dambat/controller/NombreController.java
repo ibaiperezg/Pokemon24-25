@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -58,27 +59,41 @@ public class NombreController {
     }
 
     @FXML
-    private void hasi() {
-        if (nombreField.getText().trim().isEmpty()) {
-            nombreField.setStyle("-fx-border-color: red; -fx-text-fill: white;");
-            System.out.println("❌ Error: No se ha introducido ningún nombre.");
-            return;
-        }
+private void hasi() {
+    String nombreGuardado = nombreField.getText().trim(); // Obtener el nombre ingresado
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dambat/fxml/Jolasa.fxml"));
-            Parent root = loader.load();
+    if (nombreGuardado.isEmpty()) {
+        nombreField.setStyle("-fx-border-color: red; -fx-text-fill: white;");
+        System.out.println("❌ Error: No se ha introducido ningún nombre.");
+        return;
+    }
 
-            Stage stage = (Stage) hasiButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Jolasa - El Juego");
-            stage.setFullScreen(true);
-            stage.show();
+    System.out.println("🔹 Cambiando a Jolasa con el nombre: " + nombreGuardado);
 
-            System.out.println("✅ Se ha cambiado a la escena del juego.");
-        } catch (IOException e) {
-            System.out.println("❌ ERROR al cargar la escena de juego.");
-            e.printStackTrace();
-        }
+    try {
+        // Cargar la nueva escena
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/dambat/fxml/Jolasa.fxml"));
+        Parent root = loader.load();
+
+        // Obtener el controlador de Jolasa
+        JolasaController jolasaController = loader.getController();
+        jolasaController.setNombre(nombreGuardado); // Pasar el nombre al controlador de Jolasa
+
+        // Cambiar la escena
+        Stage stage = (Stage) nombreField.getScene().getWindow(); // Obtener la ventana actual
+        stage.setScene(new Scene(root));
+        stage.setTitle("Jolasa - El Juego");
+        stage.setFullScreen(true);
+        stage.show();
+
+        System.out.println("✅ Se ha cambiado a la escena del juego.");
+    } catch (IOException e) {
+        System.out.println("❌ ERROR al cargar la escena de juego.");
+        e.printStackTrace();
     }
 }
+
+
+}
+
+    
