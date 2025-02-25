@@ -25,24 +25,26 @@ public class NombreController {
     private Button hasiButton;
 
     @FXML
-    public void initialize() {
-        // Crear la base de datos si no existe
-        DatabaseManager.createTable();
+public void initialize() {
+    // Crear la base de datos si no existe
+    DatabaseManager.createTable(); // Asegurar que la tabla "jugadores" existe
+    DatabaseManager.createRankingTable(); // Asegurar que la tabla "ranking" existe
 
-        // Cargar el último nombre guardado si existe
-        String savedName = DatabaseManager.getLastSavedName();
-        if (savedName != null) {
-            nombreField.setText(savedName);
-        }
-
-        // Animación de parpadeo en el campo de texto
-        FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), nombreField);
-        fadeAnimation.setFromValue(0.5);
-        fadeAnimation.setToValue(1.0);
-        fadeAnimation.setCycleCount(FadeTransition.INDEFINITE);
-        fadeAnimation.setAutoReverse(true);
-        fadeAnimation.play();
+    // Cargar el último nombre guardado si existe
+    String savedName = DatabaseManager.getLastSavedName();
+    if (savedName != null) {
+        nombreField.setText(savedName);
     }
+
+    // Animación de parpadeo en el campo de texto
+    FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), nombreField);
+    fadeAnimation.setFromValue(0.5);
+    fadeAnimation.setToValue(1.0);
+    fadeAnimation.setCycleCount(FadeTransition.INDEFINITE);
+    fadeAnimation.setAutoReverse(true);
+    fadeAnimation.play();
+}
+
 
     @FXML
     private void guardarNombre() {

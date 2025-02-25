@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import dambat.App;
 import dambat.Config;
+import dambat.database.DatabaseManager;
 import dambat.model.Arbusto;
 import dambat.model.Duskull;
 import dambat.model.Escalera;
@@ -53,6 +54,9 @@ public class JolasaController {
     private Timeline haunterTimeline;
     private Escalera escalera;
     private boolean IstouchinEscalera = false;
+    private long tiempoInicio;
+    private String nombreUsuario;
+    private double tiempoTranscurrido;
 
     // Inizializazioa
     @FXML
@@ -83,6 +87,8 @@ public class JolasaController {
 
     @FXML
     public void jolastenHasi() {
+        tiempoInicio = System.currentTimeMillis(); // **⏱ Iniciar cronómetro**
+        System.out.println("⏳ Cronómetro iniciado...");
         startGengarAnimation();
         startHaunterAnimation();
 
@@ -327,52 +333,59 @@ public class JolasaController {
     }
 
     private void checkEscaleraCollision(int pikachuX, int pikachuY) {
-        // Obtener las coordenadas actuales de la escalera
         Integer escaleraX = GridPane.getColumnIndex(escalera);
         Integer escaleraY = GridPane.getRowIndex(escalera);
-
-        // Si las coordenadas son nulas, asignar la posición correcta manualmente
+    
         if (escaleraX == null || escaleraY == null) {
             escaleraX = 7;
             escaleraY = 7;
         }
-
-        // Imprimir coordenadas de depuración
-        System.out.println("📌 Pikachu en: (" + pikachuX + "," + pikachuY + ")");
-        System.out.println("🏆 Escalera en: (" + escaleraX + "," + escaleraY + ")");
-
-        // Verificar si Pikachu ha llegado a la escalera
+    
         if (pikachuX == escaleraX && pikachuY == escaleraY) {
-            System.out.println("🎉 Pikachu ha llegado a la escalera. Cambiando de escena...");
+            System.out.println("🎉 Pikachu ha llegado a la escalera. Guardando tiempo y cambiando de escena...");
+    
+            // ⏳ Guardamos el tiempo total jugado
+            long tiempoFinal = System.currentTimeMillis();
+            tiempoTranscurrido = (tiempoFinal - tiempoInicio) / 1000.0; // Convertimos a segundos
+    
+            // 🔥 Guardamos el tiempo en la base de datos
+            DatabaseManager.guardarTiempo(nombreUsuario, tiempoTranscurrido);
+            System.out.println("✅ Tiempo guardado en la base de datos: " + tiempoTranscurrido + "s");
+    
+            // Cambiamos a la escena final
             cambiarAEscenaFinal();
         }
     }
+    
+    
 
     private void cambiarAEscenaFinal() {
         try {
-            // Aseguramos que la ruta sea correcta
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dambat/fxml/escenaFinal.fxml"));
-
-            // Verificar si el archivo realmente se encuentra
-            if (loader.getLocation() == null) {
-                System.out.println("❌ ERROR: No se encuentra escenaFinal.fxml en /dambat/fxml/");
-                return;
-            }
-
             Parent root = loader.load();
-
+    
+            FinalController finalController = loader.getController();
+            if (finalController != null) {
+                // 🔥 Pasamos el tiempo del jugador actual a la escena final
+                finalController.mostrarRanking(nombreUsuario, tiempoTranscurrido);
+            } else {
+                System.out.println("❌ ERROR: FinalController no se ha inicializado.");
+            }
+    
             Stage stage = (Stage) borrokaEremua.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Final - Puntuación");
             stage.setFullScreen(true);
             stage.show();
-
+    
             System.out.println("✅ Se ha cambiado a la escena de Final.");
         } catch (IOException e) {
             System.out.println("❌ ERROR: No se pudo cargar la escena Final.");
             e.printStackTrace();
         }
     }
+    
+
 
     private void resetGame() {
         pikapikaStage.hide();
@@ -399,10 +412,13 @@ public class JolasaController {
     }
 
     public void setNombre(String nombre) {
+        this.nombreUsuario = nombre; // Asegurar que el nombre se guarda
         if (nombreLabel != null) {
             nombreLabel.setText("Hola, " + nombre + "!");
         }
+        System.out.println("🟢 Nombre del usuario establecido: " + nombreUsuario);
     }
+    
 
     // Teklatu ekintzak kudeatzeko metodoa
     private void handleKeyPress(KeyEvent event) throws Exception {
@@ -435,6 +451,5 @@ public class JolasaController {
 
         }
     }
-
 
 }
