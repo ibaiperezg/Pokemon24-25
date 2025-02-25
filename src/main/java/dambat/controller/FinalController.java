@@ -1,7 +1,11 @@
 package dambat.controller;
 
+import javafx.util.Duration;
+
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,9 +26,18 @@ public class FinalController {
     /**
      * Eszena kargatzen denean exekutatzen da.
      */
+    
+    @FXML
     public void initialize() {
-        // Puntuazioa eguneratu (datu dinamikoekin aldatu daiteke)
         player1Score.setText("X: 7 PUNTU"); // Datu dinamikoak erabiliz aldatu
+
+        // Animación de parpadeo en la puntuación
+        FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), player1Score);
+        fadeAnimation.setFromValue(0.5);
+        fadeAnimation.setToValue(1.0);
+        fadeAnimation.setCycleCount(FadeTransition.INDEFINITE);
+        fadeAnimation.setAutoReverse(true);
+        fadeAnimation.play();
     }
 
     /**

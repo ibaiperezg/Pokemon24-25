@@ -24,7 +24,7 @@ public class App extends Application {
         Parent root = fxmlLoader.load();
     
         // Especifica explícitamente un tamaño inicial adecuado
-        scene = new Scene(root, 800, 600); // ajusta estos valores según tu necesidad
+        scene = new Scene(root, 1560, 900); // ajusta estos valores según tu necesidad
     
         stage.setScene(scene);
         stage.sizeToScene(); // ajusta automáticamente según contenido

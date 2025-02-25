@@ -11,10 +11,12 @@ import dambat.model.Gengar;
 import dambat.model.Haunter;
 import dambat.model.Pikachu;
 import dambat.model.Terrain;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,8 +38,7 @@ public class JolasaController {
     public GridPane borrokaEremua;
     @FXML
     public VBox jolaseremua;
-    
-    
+
     // Pikachu objetua
     private Pikachu pikachu;
     private Duskull duskull;
@@ -57,26 +58,35 @@ public class JolasaController {
         createAndPlaceDuskull();
         createPikapikaStage();
         createAndPlaceGengar();
-        
+
         createAndPlaceHaunter();
         createEscalera();
-            
+        Node nombreField = new Node() {
+        };
+        FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), nombreField);
+        fadeAnimation.setFromValue(0.5);
+        fadeAnimation.setToValue(1.0);
+        fadeAnimation.setCycleCount(FadeTransition.INDEFINITE); // CONFIGURACIÓN EN JAVA
+        fadeAnimation.setAutoReverse(true);
+        fadeAnimation.play();
+
     }
+
     @FXML
-    public void jolastenHasi(){
+    public void jolastenHasi() {
         startGengarAnimation();
         startHaunterAnimation();
 
-        //Eszenan gauden bitartean, teklatua entzuten jarri
-        Scene unekoEszena =borrokaEremua.getScene();
-        unekoEszena.setOnKeyPressed(Event->{
+        // Eszenan gauden bitartean, teklatua entzuten jarri
+        Scene unekoEszena = borrokaEremua.getScene();
+        unekoEszena.setOnKeyPressed(Event -> {
             try {
                 handleKeyPress(Event);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        }); 
+        });
     }
 
     // Erremintaren bidezko bideen konfigurazioa
@@ -125,7 +135,7 @@ public class JolasaController {
     public void createAndPlacePikachu() {
         pikachu = new Pikachu();
         borrokaEremua.add(pikachu, 0, 0);
-        
+
     }
 
     public void createAndPlaceDuskull() {
@@ -366,7 +376,3 @@ public class JolasaController {
     }
 
 }
-        
-            
-    
-
