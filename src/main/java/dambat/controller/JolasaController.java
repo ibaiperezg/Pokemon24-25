@@ -15,8 +15,10 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -256,9 +258,13 @@ public class JolasaController {
                             pikachuReachedEscalera = true;
                         }
                     }
+                    GridPane.setColumnIndex(pikachu, newCellX);
+                    GridPane.setRowIndex(pikachu, newCellY);
+                    System.out.println("📌 Pikachu se ha movido a: (" + newCellX + ", " + newCellY + ")");
 
                     // Kolisioa begiratzen du
                     checkCollision();
+                    checkEscaleraCollision(newCellX, newCellY);
                     return; // Mugimendua amaitu, irten
                 }
             }
@@ -311,6 +317,54 @@ public class JolasaController {
     public void start() throws IOException {
         App.setRoot("Jolasa2");
 
+    }
+
+    private void checkEscaleraCollision(int pikachuX, int pikachuY) {
+        // Obtener las coordenadas actuales de la escalera
+        Integer escaleraX = GridPane.getColumnIndex(escalera);
+        Integer escaleraY = GridPane.getRowIndex(escalera);
+
+        // Si las coordenadas son nulas, asignar la posición correcta manualmente
+        if (escaleraX == null || escaleraY == null) {
+            escaleraX = 7;
+            escaleraY = 7;
+        }
+
+        // Imprimir coordenadas de depuración
+        System.out.println("📌 Pikachu en: (" + pikachuX + "," + pikachuY + ")");
+        System.out.println("🏆 Escalera en: (" + escaleraX + "," + escaleraY + ")");
+
+        // Verificar si Pikachu ha llegado a la escalera
+        if (pikachuX == escaleraX && pikachuY == escaleraY) {
+            System.out.println("🎉 Pikachu ha llegado a la escalera. Cambiando de escena...");
+            cambiarAEscenaFinal();
+        }
+    }
+
+    private void cambiarAEscenaFinal() {
+        try {
+            // Aseguramos que la ruta sea correcta
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dambat/fxml/escenaFinal.fxml"));
+
+            // Verificar si el archivo realmente se encuentra
+            if (loader.getLocation() == null) {
+                System.out.println("❌ ERROR: No se encuentra escenaFinal.fxml en /dambat/fxml/");
+                return;
+            }
+
+            Parent root = loader.load();
+
+            Stage stage = (Stage) borrokaEremua.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Final - Puntuación");
+            stage.setFullScreen(true);
+            stage.show();
+
+            System.out.println("✅ Se ha cambiado a la escena de Final.");
+        } catch (IOException e) {
+            System.out.println("❌ ERROR: No se pudo cargar la escena Final.");
+            e.printStackTrace();
+        }
     }
 
     private void resetGame() {
