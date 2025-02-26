@@ -52,10 +52,10 @@ public void initialize() {
 
         if (!nombre.isEmpty()) {
             DatabaseManager.saveName(nombre);
-            nombreField.setStyle("-fx-border-color: green; -fx-text-fill: white;");
+            nombreField.setStyle("-fx-border-color: green; -fx-text-fill: black;");
             System.out.println("✅ Nombre guardado correctamente: " + nombre);
         } else {
-            nombreField.setStyle("-fx-border-color: red; -fx-text-fill: white;");
+            nombreField.setStyle("-fx-border-color: red; -fx-text-fill: black;");
             System.out.println("❌ Error: El nombre está vacío.");
         }
     }

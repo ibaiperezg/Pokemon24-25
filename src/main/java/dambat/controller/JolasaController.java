@@ -366,7 +366,7 @@ public class JolasaController {
     
             FinalController finalController = loader.getController();
             if (finalController != null) {
-                // 🔥 Pasamos el tiempo del jugador actual a la escena final
+                
                 finalController.mostrarRanking(nombreUsuario, tiempoTranscurrido);
             } else {
                 System.out.println("❌ ERROR: FinalController no se ha inicializado.");

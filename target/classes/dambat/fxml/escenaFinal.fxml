@@ -12,60 +12,52 @@
 <AnchorPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dambat.controller.FinalController">
     
    <children>
-      <!-- Fondo expandido correctamente -->
-      <ImageView fx:id="backgroundImage" fitWidth="1920.0" fitHeight="1080.0" pickOnBounds="true" preserveRatio="false">
+      <!-- Fondo oscuro con imagen (se expande a toda la pantalla) -->
+      <ImageView fx:id="backgroundImage" fitHeight="1000.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/fondoFinal.jpg" />
          </image>
          <effect>
              <DropShadow color="black" radius="50.0" />
          </effect>
+         <AnchorPane.topAnchor>0.0</AnchorPane.topAnchor>
+         <AnchorPane.bottomAnchor>0.0</AnchorPane.bottomAnchor>
+         <AnchorPane.leftAnchor>0.0</AnchorPane.leftAnchor>
+         <AnchorPane.rightAnchor>0.0</AnchorPane.rightAnchor>
       </ImageView>
 
-      <!-- Título "RANKING" CENTRADO -->
-      <Label fx:id="rankingTitle" text="RANKING"
-             style="-fx-font-size: 48px; -fx-text-fill: crimson; -fx-font-weight: bold; -fx-font-family: 'Georgia'; -fx-effect: dropshadow(three-pass-box, black, 15, 0, 0, 0);">
+      <!-- Puntuación del jugador con efecto de brillo -->
+      <Label fx:id="player1Score" layoutX="471.0" layoutY="115.0" style="-fx-font-size: 42px; -fx-text-fill: crimson; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="RANKING">
          <effect>
-             <Glow level="0.9" />
+             <Glow level="0.8" />
          </effect>
-         <AnchorPane.topAnchor="50.0" />
-         <AnchorPane.leftAnchor="0.0" />
-         <AnchorPane.rightAnchor="0.0" />
       </Label>
 
-      <!-- Cuadro de ranking bien centrado -->
-      <TextArea fx:id="rankingArea" editable="false" wrapText="true"
-                style="-fx-background-color: rgba(0, 0, 0, 0.85); -fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: red; -fx-border-width: 3px; -fx-border-radius: 10px;">
+      <!-- Cuadro de ranking con efecto de sombra roja -->
+      <TextArea fx:id="rankingArea" editable="false" layoutX="352.0" layoutY="191.0" prefHeight="250" prefWidth="500" style="-fx-background-color: rgba(0, 0, 0, 0.8); -fx-text-fill: black; -fx-font-size: 20px; -fx-font-weight: bold; -fx-border-color: red; -fx-border-width: 3px; -fx-border-radius: 10px;" wrapText="true">
          <effect>
              <DropShadow color="darkred" radius="20.0" />
          </effect>
-         <AnchorPane.topAnchor="150.0"/>
-         <AnchorPane.leftAnchor="25.0%"/>
-         <AnchorPane.rightAnchor="25.0%"/>
-         <AnchorPane.prefWidth="700"/>
-         <AnchorPane.prefHeight="350"/>
+         <AnchorPane.leftAnchor>352.0</AnchorPane.leftAnchor>
+         <AnchorPane.topAnchor>191.0</AnchorPane.topAnchor>
       </TextArea>
 
-      <!-- Botón para volver a jugar (Centrado Abajo) -->
-      <Button fx:id="restartButton" onAction="#restartGame" text="🔄 Berriro jolastu"
-              style="-fx-background-color: black; -fx-text-fill: red; -fx-font-size: 24px; -fx-font-weight: bold; -fx-border-color: darkred; -fx-border-width: 3; -fx-background-radius: 10;">
+      <!-- Botón para volver a jugar con efecto oscuro -->
+      <Button fx:id="restartButton" onAction="#restartGame" style="-fx-background-color: black; -fx-text-fill: red; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: darkred; -fx-border-width: 3; -fx-background-radius: 10;" text="🔄 Berriro jolastu">
           <effect>
               <DropShadow color="red" offsetX="5" offsetY="5" radius="15.0" />
           </effect>
-          <AnchorPane.bottomAnchor="60.0"/>
-          <AnchorPane.leftAnchor="40.0%"/>
-          <AnchorPane.rightAnchor="60.0%"/>
+          <AnchorPane.leftAnchor>50.0</AnchorPane.leftAnchor>
+          <AnchorPane.bottomAnchor>100.0</AnchorPane.bottomAnchor>
       </Button>
 
-      <!-- Botón de salir (Centrado Abajo) -->
-      <Button fx:id="exitButton" onAction="#exitGame" text="❌ Irten"
-              style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-border-color: crimson; -fx-border-width: 3; -fx-background-radius: 10;">
+      <!-- Botón de salir con estilo siniestro -->
+      <Button fx:id="exitButton" onAction="#exitGame" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: crimson; -fx-border-width: 3; -fx-background-radius: 10;" text="❌ Irten">
          <effect>
               <DropShadow color="crimson" offsetX="4" offsetY="4" radius="10.0" />
           </effect>
-          <AnchorPane.bottomAnchor="60.0"/>
-          <AnchorPane.leftAnchor="60.0%"/>
-          <AnchorPane.rightAnchor="40.0%"/>
+          <AnchorPane.rightAnchor>50.0</AnchorPane.rightAnchor>
+          <AnchorPane.bottomAnchor>100.0</AnchorPane.bottomAnchor>
       </Button>
 
    </children>
