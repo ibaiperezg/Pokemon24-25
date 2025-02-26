@@ -43,7 +43,7 @@
       </TextArea>
 
       <!-- Berriror jolasteko botoia -->
-      <Button fx:id="restartButton" onAction="#restartGame" style="-fx-background-color: black; -fx-text-fill: red; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: darkred; -fx-border-width: 3; -fx-background-radius: 10;" text="🔄 Berriro jolastu">
+      <Button fx:id="restartButton" onAction="#restartGame" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: darkred; -fx-border-width: 3; -fx-background-radius: 10;" text="🔄 Berriro jolastu">
           <effect>
               <DropShadow color="red" offsetX="5" offsetY="5" radius="15.0" />
           </effect>
@@ -52,7 +52,7 @@
       </Button>
 
       <!-- Irteteko botoia -->
-      <Button fx:id="exitButton" onAction="#exitGame" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: crimson; -fx-border-width: 3; -fx-background-radius: 10;" text="❌ Irten">
+      <Button fx:id="exitButton" onAction="#exitGame" style="-fx-background-color: black; -fx-text-fill: red; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: crimson; -fx-border-width: 3; -fx-background-radius: 10;" text="❌ Irten">
          <effect>
               <DropShadow color="crimson" offsetX="4" offsetY="4" radius="10.0" />
           </effect>
