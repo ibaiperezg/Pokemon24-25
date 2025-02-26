@@ -37,9 +37,13 @@ public class FinalController {
 
     @FXML
     public void initialize() {
-        
+        Node scrollPane = rankingArea.lookup(".scroll-pane");
+        if (scrollPane != null) {
+            scrollPane.setVisible(false);
+            scrollPane.setManaged(false);
+        }
         mostrarRanking(null, 0);
-        System.out.println("📊 Recuperando ranking...");
+        System.out.println("📊 Rankinga rekuperatzen...");
         // Parpadeo moduko animazioa Puntuazioan
         FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), player1Score);
         fadeAnimation.setFromValue(0.5);
@@ -58,7 +62,7 @@ public class FinalController {
         try {
             
             String rutaFXML = "/dambat/fxml/escenaNombre.fxml"; 
-            System.out.println("🔎 Cargando escena desde: " + getClass().getResource(rutaFXML));
+            System.out.println("🔎 Eszena kargatzen hemendik: " + getClass().getResource(rutaFXML));
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
             Parent root = loader.load();

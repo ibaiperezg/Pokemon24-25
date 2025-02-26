@@ -9,56 +9,93 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dambat.controller.FinalController">
-    
-   <children>
-      <!-- Fondoa -->
-      <ImageView fx:id="backgroundImage" fitHeight="1080.0" fitWidth="1500.0" pickOnBounds="true" preserveRatio="false">
-         <image>
-            <Image url="@../img/fondoFinal.jpg" />
-         </image>
-         <effect>
-             <DropShadow color="black" radius="50.0" />
-         </effect>
-         <AnchorPane.topAnchor>0.0</AnchorPane.topAnchor>
-         <AnchorPane.bottomAnchor>0.0</AnchorPane.bottomAnchor>
-         <AnchorPane.leftAnchor>0.0</AnchorPane.leftAnchor>
-         <AnchorPane.rightAnchor>0.0</AnchorPane.rightAnchor>
-      </ImageView>
+<AnchorPane style="-fx-background-color: black;" 
+             xmlns="http://javafx.com/javafx/23.0.1" 
+             xmlns:fx="http://javafx.com/fxml/1" 
+             fx:controller="dambat.controller.FinalController">
 
-      <!-- Puntuazioa brilloarerkin -->
-      <Label fx:id="player1Score" layoutX="676.0" layoutY="167.0" style="-fx-font-size: 42px; -fx-text-fill: crimson; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="RANKING">
-         <effect>
-             <Glow level="0.8" />
-         </effect>
-      </Label>
+    <children>
 
-      <!-- Rankinga shadow gorri batekin -->
-      <TextArea fx:id="rankingArea" editable="false" layoutX="552.0" layoutY="217.0" prefHeight="300" prefWidth="500" style="-fx-background-color: rgba(0, 0, 0, 0.8); -fx-text-fill: black; -fx-font-size: 20px; -fx-font-weight: bold; -fx-border-color: red; -fx-border-width: 3px; -fx-border-radius: 10px;" wrapText="true">
-         <effect>
-             <DropShadow color="darkred" radius="20.0" />
-         </effect>
-         <AnchorPane.leftAnchor>552.0</AnchorPane.leftAnchor>
-         <AnchorPane.topAnchor>217.0</AnchorPane.topAnchor>
-      </TextArea>
+        <!-- Fondoa -->
+        <ImageView fx:id="backgroundImage" fitHeight="1080.0" fitWidth="1500.0" pickOnBounds="true" preserveRatio="false">
+            <image>
+                <Image url="@../img/fondoFinal.jpg" />
+            </image>
+            <effect>
+                <DropShadow color="black" radius="50.0" />
+            </effect>
+            <AnchorPane.topAnchor>0.0</AnchorPane.topAnchor>
+            <AnchorPane.bottomAnchor>0.0</AnchorPane.bottomAnchor>
+            <AnchorPane.leftAnchor>0.0</AnchorPane.leftAnchor>
+            <AnchorPane.rightAnchor>0.0</AnchorPane.rightAnchor>
+        </ImageView>
 
-      <!-- Berriror jolasteko botoia -->
-      <Button fx:id="restartButton" onAction="#restartGame" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: darkred; -fx-border-width: 3; -fx-background-radius: 10;" text="🔄 Berriro jolastu">
-          <effect>
-              <DropShadow color="red" offsetX="5" offsetY="5" radius="15.0" />
-          </effect>
-          <AnchorPane.leftAnchor>50.0</AnchorPane.leftAnchor>
-          <AnchorPane.bottomAnchor>100.0</AnchorPane.bottomAnchor>
-      </Button>
+        <!-- Puntuazioa (RANKING) distira efektuarekin -->
+        <Label fx:id="player1Score" layoutX="676.0" layoutY="167.0" 
+               style="-fx-font-size: 42px; 
+                      -fx-text-fill: crimson; 
+                      -fx-font-weight: bold; 
+                      -fx-font-family: 'Georgia';" 
+               text="RANKING">
+            <effect>
+                <Glow level="0.8" />
+            </effect>
+        </Label>
 
-      <!-- Irteteko botoia -->
-      <Button fx:id="exitButton" onAction="#exitGame" style="-fx-background-color: black; -fx-text-fill: red; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: crimson; -fx-border-width: 3; -fx-background-radius: 10;" text="❌ Irten">
-         <effect>
-              <DropShadow color="crimson" offsetX="4" offsetY="4" radius="10.0" />
-          </effect>
-          <AnchorPane.rightAnchor>50.0</AnchorPane.rightAnchor>
-          <AnchorPane.bottomAnchor>100.0</AnchorPane.bottomAnchor>
-      </Button>
+        <!-- Ranking irudikatzeko TextArea beldurgarriarekin, scrolla kenduta -->
+        <TextArea fx:id="rankingArea" editable="false" layoutX="552.0" layoutY="217.0" 
+                  prefHeight="500" prefWidth="500" 
+                  style="-fx-background-color: rgba(20, 0, 0, 0.95); 
+                         -fx-text-fill: black; 
+                         -fx-font-size: 28px; 
+                         -fx-font-family: 'Chiller', 'Serif'; 
+                         -fx-font-weight: bold; 
+                         -fx-border-color: darkred; 
+                         -fx-border-width: 6px; 
+                         -fx-border-radius: 20px; 
+                         -fx-border-style: solid; 
+                         -fx-effect: innershadow(gaussian, black, 20, 0.7, 0, 0), 
+                                      dropshadow(gaussian, darkred, 15, 0.8, 0, 5); 
+                         -fx-padding: 15px;
+                         -fx-opacity: 1;
+                         -fx-cursor: hand;
+                         -fx-control-inner-background: transparent;" 
+                  wrapText="true"
+                  focusTraversable="false"/>
 
-   </children>
+        <!-- Berriro jolasteko botoia -->
+        <Button fx:id="restartButton" onAction="#restartGame" 
+                style="-fx-background-color: black; 
+                       -fx-text-fill: white; 
+                       -fx-font-size: 22px; 
+                       -fx-font-weight: bold; 
+                       -fx-border-color: darkred; 
+                       -fx-border-width: 3; 
+                       -fx-background-radius: 10;" 
+                text="🔄 Berriro jolastu">
+            <effect>
+                <DropShadow color="red" offsetX="5" offsetY="5" radius="15.0" />
+            </effect>
+            <AnchorPane.leftAnchor>50.0</AnchorPane.leftAnchor>
+            <AnchorPane.bottomAnchor>100.0</AnchorPane.bottomAnchor>
+        </Button>
+
+        <!-- Irteteko botoia -->
+        <Button fx:id="exitButton" onAction="#exitGame" 
+                style="-fx-background-color: black; 
+                       -fx-text-fill: red; 
+                       -fx-font-size: 22px; 
+                       -fx-font-weight: bold; 
+                       -fx-border-color: crimson; 
+                       -fx-border-width: 3; 
+                       -fx-background-radius: 10;" 
+                text="❌ Irten">
+            <effect>
+                <DropShadow color="crimson" offsetX="4" offsetY="4" radius="10.0" />
+            </effect>
+            <AnchorPane.rightAnchor>50.0</AnchorPane.rightAnchor>
+            <AnchorPane.bottomAnchor>100.0</AnchorPane.bottomAnchor>
+        </Button>
+
+    </children>
 </AnchorPane>
