@@ -12,8 +12,8 @@
 <AnchorPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dambat.controller.FinalController">
     
    <children>
-      <!-- Fondo oscuro con imagen (se expande a toda la pantalla) -->
-      <ImageView fx:id="backgroundImage" fitHeight="1000.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
+      <!-- Fondoa -->
+      <ImageView fx:id="backgroundImage" fitHeight="1080.0" fitWidth="1500.0" pickOnBounds="true" preserveRatio="false">
          <image>
             <Image url="@../img/fondoFinal.jpg" />
          </image>
@@ -26,23 +26,23 @@
          <AnchorPane.rightAnchor>0.0</AnchorPane.rightAnchor>
       </ImageView>
 
-      <!-- Puntuación del jugador con efecto de brillo -->
-      <Label fx:id="player1Score" layoutX="471.0" layoutY="115.0" style="-fx-font-size: 42px; -fx-text-fill: crimson; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="RANKING">
+      <!-- Puntuazioa brilloarerkin -->
+      <Label fx:id="player1Score" layoutX="676.0" layoutY="167.0" style="-fx-font-size: 42px; -fx-text-fill: crimson; -fx-font-weight: bold; -fx-font-family: 'Georgia';" text="RANKING">
          <effect>
              <Glow level="0.8" />
          </effect>
       </Label>
 
-      <!-- Cuadro de ranking con efecto de sombra roja -->
-      <TextArea fx:id="rankingArea" editable="false" layoutX="352.0" layoutY="191.0" prefHeight="250" prefWidth="500" style="-fx-background-color: rgba(0, 0, 0, 0.8); -fx-text-fill: black; -fx-font-size: 20px; -fx-font-weight: bold; -fx-border-color: red; -fx-border-width: 3px; -fx-border-radius: 10px;" wrapText="true">
+      <!-- Rankinga shadow gorri batekin -->
+      <TextArea fx:id="rankingArea" editable="false" layoutX="552.0" layoutY="217.0" prefHeight="300" prefWidth="500" style="-fx-background-color: rgba(0, 0, 0, 0.8); -fx-text-fill: black; -fx-font-size: 20px; -fx-font-weight: bold; -fx-border-color: red; -fx-border-width: 3px; -fx-border-radius: 10px;" wrapText="true">
          <effect>
              <DropShadow color="darkred" radius="20.0" />
          </effect>
-         <AnchorPane.leftAnchor>352.0</AnchorPane.leftAnchor>
-         <AnchorPane.topAnchor>191.0</AnchorPane.topAnchor>
+         <AnchorPane.leftAnchor>552.0</AnchorPane.leftAnchor>
+         <AnchorPane.topAnchor>217.0</AnchorPane.topAnchor>
       </TextArea>
 
-      <!-- Botón para volver a jugar con efecto oscuro -->
+      <!-- Berriror jolasteko botoia -->
       <Button fx:id="restartButton" onAction="#restartGame" style="-fx-background-color: black; -fx-text-fill: red; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: darkred; -fx-border-width: 3; -fx-background-radius: 10;" text="🔄 Berriro jolastu">
           <effect>
               <DropShadow color="red" offsetX="5" offsetY="5" radius="15.0" />
@@ -51,7 +51,7 @@
           <AnchorPane.bottomAnchor>100.0</AnchorPane.bottomAnchor>
       </Button>
 
-      <!-- Botón de salir con estilo siniestro -->
+      <!-- Irteteko botoia -->
       <Button fx:id="exitButton" onAction="#exitGame" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-color: crimson; -fx-border-width: 3; -fx-background-radius: 10;" text="❌ Irten">
          <effect>
               <DropShadow color="crimson" offsetX="4" offsetY="4" radius="10.0" />

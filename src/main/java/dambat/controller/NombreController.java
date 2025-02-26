@@ -26,17 +26,17 @@ public class NombreController {
 
     @FXML
 public void initialize() {
-    // Crear la base de datos si no existe
-    DatabaseManager.createTable(); // Asegurar que la tabla "jugadores" existe
-    DatabaseManager.createRankingTable(); // Asegurar que la tabla "ranking" existe
+    // Datubasea sortu ez baldinbada existitzen
+    DatabaseManager.createTable(); // Taula dagoen ziurtatu
+    DatabaseManager.createRankingTable(); // ranking taula dagoela ziurtatu
 
-    // Cargar el último nombre guardado si existe
+    // Gordetako azken izena kargatu
     String savedName = DatabaseManager.getLastSavedName();
     if (savedName != null) {
         nombreField.setText(savedName);
     }
 
-    // Animación de parpadeo en el campo de texto
+    // Parpadeoa animazioa izenaren barruan
     FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), nombreField);
     fadeAnimation.setFromValue(0.5);
     fadeAnimation.setToValue(1.0);
@@ -53,44 +53,44 @@ public void initialize() {
         if (!nombre.isEmpty()) {
             DatabaseManager.saveName(nombre);
             nombreField.setStyle("-fx-border-color: green; -fx-text-fill: black;");
-            System.out.println("✅ Nombre guardado correctamente: " + nombre);
+            System.out.println("✅ Izena ondo gordeta: " + nombre);
         } else {
             nombreField.setStyle("-fx-border-color: red; -fx-text-fill: black;");
-            System.out.println("❌ Error: El nombre está vacío.");
+            System.out.println("❌ Errorea:Izena utzik dago, bete ezazu.");
         }
     }
 
     @FXML
 private void hasi() {
-    String nombreGuardado = nombreField.getText().trim(); // Obtener el nombre ingresado
+    String nombreGuardado = nombreField.getText().trim(); // Sartutako izena jaso
 
     if (nombreGuardado.isEmpty()) {
         nombreField.setStyle("-fx-border-color: red; -fx-text-fill: white;");
-        System.out.println("❌ Error: No se ha introducido ningún nombre.");
+        System.out.println("❌ Errorea: Ez da izenik sartu.");
         return;
     }
 
-    System.out.println("🔹 Cambiando a Jolasa con el nombre: " + nombreGuardado);
+    System.out.println("Eszenaz aldatzen: " + nombreGuardado);
 
     try {
-        // Cargar la nueva escena
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dambat/fxml/Jolasa.fxml"));
         Parent root = loader.load();
 
-        // Obtener el controlador de Jolasa
+        // Jolasacontroller jaso eta izena pasatu
         JolasaController jolasaController = loader.getController();
-        jolasaController.setNombre(nombreGuardado); // Pasar el nombre al controlador de Jolasa
+        jolasaController.setNombre(nombreGuardado); 
 
-        // Cambiar la escena
-        Stage stage = (Stage) nombreField.getScene().getWindow(); // Obtener la ventana actual
+        // eszena aldatu
+        Stage stage = (Stage) nombreField.getScene().getWindow(); 
         stage.setScene(new Scene(root));
-        stage.setTitle("Jolasa - El Juego");
+        stage.setTitle("Jolasa");
         stage.setFullScreen(true);
         stage.show();
 
-        System.out.println("✅ Se ha cambiado a la escena del juego.");
+        System.out.println("✅ Eszena aldatu da.");
     } catch (IOException e) {
-        System.out.println("❌ ERROR al cargar la escena de juego.");
+        System.out.println("❌ ERROREA eszena aldatzerakoan.");
         e.printStackTrace();
     }
 }

@@ -68,27 +68,13 @@ public class JolasaController {
         createAndPlaceGengar();
         createAndPlaceHaunter();
         createEscalera();
-        /*
-         * if (borrokaEremua != null) {
-         * FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5),
-         * borrokaEremua);
-         * fadeAnimation.setFromValue(0.5);
-         * fadeAnimation.setToValue(1.0);
-         * fadeAnimation.setCycleCount(FadeTransition.INDEFINITE);
-         * fadeAnimation.setAutoReverse(true);
-         * fadeAnimation.play();
-         * } else {
-         * System.out.
-         * println("⚠️ ADVERTENCIA: `borrokaEremua` es NULL. No se aplicará FadeTransition."
-         * );
-         * }
-         */
+        
     }
 
     @FXML
     public void jolastenHasi() {
-        tiempoInicio = System.currentTimeMillis(); // **⏱ Iniciar cronómetro**
-        System.out.println("⏳ Cronómetro iniciado...");
+        tiempoInicio = System.currentTimeMillis(); // kronometroa hasten du
+        System.out.println("⏳Kronoa martxan...");
         startGengarAnimation();
         startHaunterAnimation();
 
@@ -302,7 +288,7 @@ public class JolasaController {
             Group root = (Group) currentScene.getRoot();
 
             StackPane pikapikaPane = (StackPane) pikapikaStage.getScene().getRoot();
-            pikapikaPane.getChildren().clear(); // Limpiar cualquier contenido anterior
+            pikapikaPane.getChildren().clear(); 
             pikapikaPane.getChildren().add(new ImageView(new Image("pikapika.png")));
 
             pikapikaStage.setFullScreen(true);
@@ -342,17 +328,17 @@ public class JolasaController {
         }
     
         if (pikachuX == escaleraX && pikachuY == escaleraY) {
-            System.out.println("🎉 Pikachu ha llegado a la escalera. Guardando tiempo y cambiando de escena...");
+            System.out.println("🎉 Pikachu eskailerara iritsi da!. Denbora gordetzen eta eszenaz aldatzen...");
     
-            // ⏳ Guardamos el tiempo total jugado
+            // Denbora gorde
             long tiempoFinal = System.currentTimeMillis();
-            tiempoTranscurrido = (tiempoFinal - tiempoInicio) / 1000.0; // Convertimos a segundos
+            tiempoTranscurrido = (tiempoFinal - tiempoInicio) / 1000.0; // Segundotan jarri
     
-            // 🔥 Guardamos el tiempo en la base de datos
+            // Denbora datubasera
             DatabaseManager.guardarTiempo(nombreUsuario, tiempoTranscurrido);
             System.out.println("✅ Tiempo guardado en la base de datos: " + tiempoTranscurrido + "s");
     
-            // Cambiamos a la escena final
+            // Eszena aldatu
             cambiarAEscenaFinal();
         }
     }
@@ -369,18 +355,18 @@ public class JolasaController {
                 
                 finalController.mostrarRanking(nombreUsuario, tiempoTranscurrido);
             } else {
-                System.out.println("❌ ERROR: FinalController no se ha inicializado.");
+                System.out.println("❌ ERROREA: FinalController ez da inizializatu.");
             }
     
             Stage stage = (Stage) borrokaEremua.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("Final - Puntuación");
+            stage.setTitle("Puntuazioa");
             stage.setFullScreen(true);
             stage.show();
     
-            System.out.println("✅ Se ha cambiado a la escena de Final.");
+            System.out.println("✅ Azken eszenara aldatu da.");
         } catch (IOException e) {
-            System.out.println("❌ ERROR: No se pudo cargar la escena Final.");
+            System.out.println("❌ ERROREA: Ezin izan da azken eszena kargatu.");
             e.printStackTrace();
         }
     }
@@ -412,11 +398,11 @@ public class JolasaController {
     }
 
     public void setNombre(String nombre) {
-        this.nombreUsuario = nombre; // Asegurar que el nombre se guarda
+        this.nombreUsuario = nombre; // AIzena gordetzen dela ziurtatu
         if (nombreLabel != null) {
-            nombreLabel.setText("Hola, " + nombre + "!");
+            nombreLabel.setText("Kaixo, " + nombre + "!");
         }
-        System.out.println("🟢 Nombre del usuario establecido: " + nombreUsuario);
+        System.out.println("🟢 Erabiltzaile izena jarrits: " + nombreUsuario);
     }
     
 

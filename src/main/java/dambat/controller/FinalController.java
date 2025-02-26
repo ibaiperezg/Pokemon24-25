@@ -40,7 +40,7 @@ public class FinalController {
         
         mostrarRanking(null, 0);
         System.out.println("📊 Recuperando ranking...");
-        // Animación de parpadeo en la puntuación
+        // Parpadeo moduko animazioa Puntuazioan
         FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), player1Score);
         fadeAnimation.setFromValue(0.5);
         fadeAnimation.setToValue(1.0);
@@ -56,31 +56,31 @@ public class FinalController {
     @FXML
     private void restartGame() {
         try {
-            // 📌 Ruta del archivo FXML de la pantalla de ingreso del nombre
-            String rutaFXML = "/dambat/fxml/escenaNombre.fxml"; // Cambiar la ruta al FXML de NombreController
+            
+            String rutaFXML = "/dambat/fxml/escenaNombre.fxml"; 
             System.out.println("🔎 Cargando escena desde: " + getClass().getResource(rutaFXML));
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
             Parent root = loader.load();
 
-            // 🎯 Obtener el controlador de la nueva escena (NombreController)
+            // Eszena berriko kontroladorea hartu
             NombreController nombreController = loader.getController();
             if (nombreController != null) {
-                System.out.println("✅ NombreController cargado correctamente.");
+                System.out.println("✅ NombreController ONDO kargatu da.");
             } else {
-                System.out.println("❌ ERROR: NombreController no se ha inicializado.");
+                System.out.println("❌ ERROREA: NombreController ez da inizializatu.");
             }
 
-            // 🚀 Cambiar la escena a la de NombreController
+            // NombreControllerrera aldatu
             Stage stage = (Stage) restartButton.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("Introduce tu Nombre"); // Personalizar el título de la ventana
+            stage.setTitle("Izena sartu"); // Titulua
             stage.setFullScreen(true);
             stage.show();
 
-            System.out.println("🔄 Se ha cambiado a la escena del Nombre.");
+            System.out.println("🔄 Lehenengo eszenara aldatu da.");
         } catch (IOException e) {
-            System.out.println("❌ ERROR: No se pudo cargar la escena del Nombre.");
+            System.out.println("❌ ERROREA: Ezin izan da lehenengo eszena kargatu.");
             e.printStackTrace();
         }
     }
@@ -97,23 +97,23 @@ public class FinalController {
     }
 
     public void mostrarRanking(String nombreJugador, double tiempoJugador) {
-        // Obtener los 5 mejores tiempos
+        // 5 denbora onenak jaso
         List<String> topTiempos = DatabaseManager.obtenerTopTiempos();
     
-        // Debug: Ver en consola los datos obtenidos
+        // Debug: Konsolan ikusi jasotako datuak
         System.out.println("📊 Recuperando ranking...");
     
         StringBuilder rankingText = new StringBuilder();
         
-        // 1️⃣ Primero, mostramos el tiempo del jugador actual
-        rankingText.append("🕒 Tu tiempo: ").append(nombreJugador).append(" - ").append(tiempoJugador).append("s\n\n");
+        // 1Oraingo jokalariaren denbora
+        rankingText.append("🕒 ZURE DENBORA: ").append(nombreJugador).append(" - ").append(tiempoJugador).append("s\n\n");
     
-        // 2️⃣ Luego, mostramos el ranking general
-        rankingText.append("🏆 Mejores tiempos:\n");
+        // Ranking generala
+        rankingText.append("🏆 DENBORA ONENAK:\n");
         
         if (topTiempos.isEmpty()) {
-            System.out.println("⚠️ No hay tiempos guardados en la base de datos.");
-            rankingText.append("⚠️ No hay tiempos registrados aún.\n¡Sé el primero en jugar!");
+            System.out.println("⚠️ Ez dago denborarik datubasean.");
+            rankingText.append("⚠️ Oraindik ez dago denborarik.\n¡Lehenengoa izan zaitez!");
         } else {
             for (String tiempo : topTiempos) {
                 System.out.println("🔹 " + tiempo);

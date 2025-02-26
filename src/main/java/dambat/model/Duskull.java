@@ -42,7 +42,7 @@ public class Duskull extends Etsaia {
         if (newCellY >= 1 && newCellY <= 4) {
             GridPane.setRowIndex(this, newCellY);
         } else {
-            // Reset Duskull's position to the starting point
+            
             GridPane.setRowIndex(this, 1);
         }
         

@@ -12,16 +12,17 @@ import java.util.List;
 public class DatabaseManager {
     private static final String URL = "jdbc:sqlite:nombres.db";
 
-    // Crear la base de datos si no existe
+    // Datu-basea sortu, existitzen ez bada
     public static void createTable() {
         try (Connection conn = DriverManager.getConnection(URL);
                 PreparedStatement stmt = conn.prepareStatement(
                         "CREATE TABLE IF NOT EXISTS jugadores (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT)")) {
             stmt.execute();
         } catch (SQLException e) {
-            System.out.println("❌ ERROR al crear la base de datos: " + e.getMessage());
+            System.out.println("❌ ERROREA datu-basea sortzean: " + e.getMessage());
         }
     }
+
     public static void verificarBaseDeDatos() {
         String sql = "SELECT name FROM sqlite_master WHERE type='table'";
         
@@ -29,12 +30,12 @@ public class DatabaseManager {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
     
-            System.out.println("📂 Tablas en la base de datos:");
+            System.out.println("📂 Datu-baseko taulak:");
             while (rs.next()) {
                 System.out.println("🔹 " + rs.getString("name"));
             }
         } catch (SQLException e) {
-            System.out.println("❌ ERROR al verificar la base de datos: " + e.getMessage());
+            System.out.println("❌ ERROREA datu-basea egiaztatzean: " + e.getMessage());
         }
     }
     
@@ -46,26 +47,25 @@ public class DatabaseManager {
         try (Connection conn = DriverManager.getConnection(URL);
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
-            System.out.println("✅ Tabla 'ranking' verificada o creada correctamente.");
+            System.out.println("✅ 'ranking' taula egiaztatu edo behar bezala sortu da.");
         } catch (SQLException e) {
-            System.out.println("❌ ERROR al crear la tabla 'ranking': " + e.getMessage());
+            System.out.println("❌ ERROREA 'ranking' taula sortzean: " + e.getMessage());
         }
     }
     
-
-    // Guardar el nombre en la base de datos
+    // Izena datu-basean gorde
     public static void saveName(String nombre) {
         try (Connection conn = DriverManager.getConnection(URL);
                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO jugadores (nombre) VALUES (?)")) {
             stmt.setString(1, nombre);
             stmt.executeUpdate();
-            System.out.println("✅ Nombre guardado en la base de datos.");
+            System.out.println("✅ Izena datu-basean gorde da.");
         } catch (SQLException e) {
-            System.out.println("❌ ERROR al guardar el nombre: " + e.getMessage());
+            System.out.println("❌ ERROREA izena gordetzean: " + e.getMessage());
         }
     }
 
-    // Recuperar el último nombre guardado
+    // Azken gordetako izena berreskuratu
     public static String getLastSavedName() {
         try (Connection conn = DriverManager.getConnection(URL);
                 PreparedStatement stmt = conn.prepareStatement("SELECT nombre FROM jugadores ORDER BY id DESC LIMIT 1");
@@ -74,12 +74,12 @@ public class DatabaseManager {
                 return rs.getString("nombre");
             }
         } catch (SQLException e) {
-            System.out.println("❌ ERROR al recuperar el nombre: " + e.getMessage());
+            System.out.println("❌ ERROREA izena berreskuratzean: " + e.getMessage());
         }
         return null;
     }
 
-    // **Guardar el tiempo en la base de datos**
+    // **Denbora datu-basean gorde**
     public static void guardarTiempo(String nombre, double tiempo) {
         String sql = "INSERT INTO ranking (nombre, tiempo) VALUES (?, ?)";
         try (Connection conn = DriverManager.getConnection(URL);
@@ -87,13 +87,13 @@ public class DatabaseManager {
             pstmt.setString(1, nombre);
             pstmt.setDouble(2, tiempo);
             pstmt.executeUpdate();
-            System.out.println("✅ Tiempo guardado en la base de datos: " + nombre + " - " + tiempo + "s");
+            System.out.println("✅ Denbora datu-basean gorde da: " + nombre + " - " + tiempo + "s");
         } catch (SQLException e) {
-            System.out.println("❌ ERROR al guardar el tiempo: " + e.getMessage());
+            System.out.println("❌ ERROREA denbora gordetzean: " + e.getMessage());
         }
     }
 
-    // **Obtener los 5 mejores tiempos ordenados**
+    // **5 denbora onenak lortu ordenatuta**
     public static List<String> obtenerTopTiempos() {
         List<String> topTiempos = new ArrayList<>();
         String sql = "SELECT nombre, tiempo FROM ranking ORDER BY tiempo ASC LIMIT 5";

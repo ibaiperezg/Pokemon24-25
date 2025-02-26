@@ -1,6 +1,5 @@
 package dambat;
 
-
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -9,46 +8,41 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-// Aplikazioaren nagusi klasea
+// Aplikazioaren klase nagusia
 public class App extends Application {
 
-    // Eszena aplikazioa
-    private static Scene scene;
-    // Kontrolatzailea aplikazioa
+    // Eszena aplikazioan
+    private static Scene eszena;
+    // Kontrolatzailea aplikazioan
     
 
-    // Aplikazioa hasi beharreko nagusiki metodoa
+    // Aplikazioa hasteko metodo nagusia
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/escenaNombre.fxml"));
-        Parent root = fxmlLoader.load();
+    public void start(Stage eszenatokia) throws IOException {
+        FXMLLoader fxmlKargatzailea = new FXMLLoader(getClass().getResource("fxml/escenaNombre.fxml"));
+        Parent erroa = fxmlKargatzailea.load();
     
-        // Especifica explícitamente un tamaño inicial adecuado
-        scene = new Scene(root, 1560, 900); // ajusta estos valores según tu necesidad
+        // Hasierako tamaina egokia esplizituki zehazten du
+        eszena = new Scene(erroa, 1560, 900); // doitu balio hauek zure beharretara egokitzeko
     
-        stage.setScene(scene);
-        stage.sizeToScene(); // ajusta automáticamente según contenido
-        stage.setResizable(true); // permitir que el usuario pueda redimensionar
-        stage.show();
+        eszenatokia.setScene(eszena);
+        eszenatokia.sizeToScene(); // edukira automatikoki egokitzen da
+        eszenatokia.setResizable(true); // erabiltzaileak tamaina aldatzea baimentzen du
+        eszenatokia.show();
     }
     
-
-
-   
-
-    // Aplikazio nagusiaren metoda
+    // Aplikazio nagusiaren metodoa
     public static void main(String[] args) {
-        // Aplikazioa hasi
+        // Aplikazioa abiarazi
         launch();
     }
 
     public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-        
+        eszena.setRoot(kargatuFXML(fxml));
     }
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("fxml/" + fxml + ".fxml"));
-        return fxmlLoader.load();
+    
+    private static Parent kargatuFXML(String fxml) throws IOException {
+        FXMLLoader fxmlKargatzailea = new FXMLLoader(App.class.getResource("fxml/" + fxml + ".fxml"));
+        return fxmlKargatzailea.load();
     }
-   
 }
