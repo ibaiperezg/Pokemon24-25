@@ -415,7 +415,7 @@ public class JolasaController {
             String videoPath = getClass().getResource("/dambat/video/sample.mp4").toExternalForm();
             System.out.println("Bideoaren bidea: " + videoPath); // Debug: Bidearen bidea kontsolan erakutsi
             Media media = new Media(videoPath);
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            MediaPlayer mediaPlayer = new MediaPlayer(media); // Usar una variable de instancia
             MediaView mediaView = new MediaView(mediaPlayer);
     
             // Bideoa pantaila osoan erakutsi
@@ -447,13 +447,25 @@ public class JolasaController {
                 videoStage.close(); // Leihoa itxi
                 cambiarAEscenaFinal(); // Eszena aldatu
             });
+    
+            // Depuración: Listeners para errores y estados
+            mediaPlayer.setOnError(() -> {
+                System.err.println("❌ ERROREA: Bideoa erreproduzitzen.");
+                System.err.println("Errorea: " + mediaPlayer.getError().getMessage());
+            });
+    
+            mediaPlayer.setOnPlaying(() -> {
+                System.out.println("▶️ Bideoa erreproduzitzen.");
+            });
+    
+            mediaPlayer.setOnStopped(() -> {
+                System.out.println("⏹️ Bideoa gelditu da.");
+            });
+    
             mediaPlayer.setOnReady(() -> {
                 System.out.println("✅ Bideoa kargatuta eta prest.");
-                mediaPlayer.play(); // Reproducir el video cuando esté listo
             });
-            videoStage.setOnCloseRequest(event -> {
-                mediaPlayer.stop(); // Detener el reproductor al cerrar la ventana
-            });
+    
             // Bideoa eta botoia erakusteko layouta sortu (AnchorPane erabiliz)
             AnchorPane root = new AnchorPane();
             root.getChildren().addAll(mediaView, skipButton);
