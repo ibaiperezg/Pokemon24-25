@@ -1,5 +1,6 @@
 package dambat.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import dambat.App;
@@ -13,20 +14,26 @@ import dambat.model.Haunter;
 import dambat.model.Pikachu;
 import dambat.model.Terrain;
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -337,7 +344,7 @@ public class JolasaController {
             System.out.println("✅ Tiempo guardado en la base de datos: " + tiempoTranscurrido + "s");
     
             // Eszena aldatu
-            cambiarAEscenaFinal();
+            showVideo();
         }
     }
     
@@ -350,7 +357,6 @@ public class JolasaController {
     
             FinalController finalController = loader.getController();
             if (finalController != null) {
-                
                 finalController.mostrarRanking(nombreUsuario, tiempoTranscurrido);
             } else {
                 System.out.println("❌ ERROREA: FinalController ez da inizializatu.");
@@ -403,7 +409,71 @@ public class JolasaController {
         System.out.println("🟢 Erabiltzaile izena jarrits: " + nombreUsuario);
     }
     
-
+    private void showVideo() {
+        try {
+            // Bideoa kargatu (bide erlatiboa erabili)
+            String videoPath = getClass().getResource("/dambat/video/sample.mp4").toExternalForm();
+            System.out.println("Bideoaren bidea: " + videoPath); // Debug: Bidearen bidea kontsolan erakutsi
+            Media media = new Media(videoPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            MediaView mediaView = new MediaView(mediaPlayer);
+    
+            // Bideoa pantaila osoan erakutsi
+            mediaView.setPreserveRatio(false); // Bideoa pantaila osoan egokitzeko
+    
+            // Bideoa erakusteko Stage berria sortu
+            Stage videoStage = new Stage();
+            videoStage.initModality(Modality.APPLICATION_MODAL);
+            videoStage.setFullScreen(true);
+    
+            // Bideoaren tamaina Stage-aren tamainara egokitu
+            mediaView.fitWidthProperty().bind(videoStage.widthProperty()); // Zabalera egokitu
+            mediaView.fitHeightProperty().bind(videoStage.heightProperty()); // Altuera egokitu
+    
+            // Saltatzeko botoia sortu (hasieratik ikusgai)
+            Button skipButton = new Button("SALTATU");
+            skipButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white; -fx-font-size: 20px;");
+            skipButton.setVisible(true); // Hasieratik ikusgai
+    
+            // Botoia klikatzean eszena aldatu (bideoa ez da geldituko)
+            skipButton.setOnAction(e -> {
+                mediaPlayer.stop(); // Bideoa gelditu
+                videoStage.close(); // Leihoa itxi
+                cambiarAEscenaFinal(); // Eszena aldatu
+            });
+    
+            // Bideoa amaitu ondoren eszena aldatu
+            mediaPlayer.setOnEndOfMedia(() -> {
+                videoStage.close(); // Leihoa itxi
+                cambiarAEscenaFinal(); // Eszena aldatu
+            });
+            mediaPlayer.setOnReady(() -> {
+                System.out.println("✅ Bideoa kargatuta eta prest.");
+                mediaPlayer.play(); // Reproducir el video cuando esté listo
+            });
+            videoStage.setOnCloseRequest(event -> {
+                mediaPlayer.stop(); // Detener el reproductor al cerrar la ventana
+            });
+            // Bideoa eta botoia erakusteko layouta sortu (AnchorPane erabiliz)
+            AnchorPane root = new AnchorPane();
+            root.getChildren().addAll(mediaView, skipButton);
+    
+            // Botoia eskubian eta behean kokatu
+            AnchorPane.setBottomAnchor(skipButton, 20.0); // Behean
+            AnchorPane.setRightAnchor(skipButton, 20.0); // Eskubian
+    
+            // Scene eta Stage konfiguratu
+            Scene scene = new Scene(root, Color.BLACK);
+            videoStage.setScene(scene);
+            videoStage.show();
+    
+            // Bideoa erreproduzitu
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.err.println("❌ ERROREA: Bideoa kargatzerakoan.");
+            e.printStackTrace();
+        }
+    }
     // Teklatu ekintzak kudeatzeko metodoa
     private void handleKeyPress(KeyEvent event) throws Exception {
         // Sakatutako tekla lortu
