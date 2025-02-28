@@ -1,0 +1,5 @@
+<StackPane xmlns="http://javafx.com/javafx/13"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.VideoController">
+    <MediaView fx:id="mediaView"/>
+</StackPane>
