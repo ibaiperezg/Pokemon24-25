@@ -4,7 +4,7 @@
 
 Hau **JavaFX**-en oinarritutako joko bat da, non jokalariak **Pikachu** kontrolatzen duen labirinto batean eta **eskailerara (Escalera)** iritsi behar duen etsaiak (**Duskull, Gengar eta Haunter**) ekidinez. Jokoak animazioak, kolisio detekzioa, kronometroa eta puntuazioak datu-basean gordetzeko aukera eskaintzen du.
 
-Proiektua **JavaFX eta Maven** erabiliz garatu da, **Java 13** bertsioarekin.
+Proiektua **JavaFX eta Maven** erabiliz garatu da, **Java 13** bertsioarekin. Javadoc bidez azalduta.
 
 ---
 
