@@ -40,6 +40,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 // Jolasaren kontrolatzailea
+/**
+ * JolasaController klasea, jokoaren kontrola kudeatzen du.
+ */
 public class JolasaController {
 
     // GridPane elementua FXML-tik kargatzeko
@@ -63,7 +66,9 @@ public class JolasaController {
     private String nombreUsuario;
     private double tiempoTranscurrido;
 
-    // Inizializazioa
+    /**
+     * Hasierako metodoa, jokoaren osagaiak sortu eta kokatzen ditu.
+     */
     @FXML
     protected void initialize() {
         displayPath();
@@ -73,9 +78,12 @@ public class JolasaController {
         createAndPlaceGengar();
         createAndPlaceHaunter();
         createEscalera();
-        
+
     }
 
+    /**
+     * Jokoa hasteko metodoa. Kronometroa aktibatzen du eta animazioak hasten ditu.
+     */
     @FXML
     public void jolastenHasi() {
         tiempoInicio = System.currentTimeMillis(); // kronometroa hasten du
@@ -102,12 +110,17 @@ public class JolasaController {
             { 3, 7 }, { 4, 7 }, { 5, 7 }, { 6, 7 }, { 7, 7 } };
 
     private String nombre;
-
+/**
+     * Bigarren eszenara aldatzen du.
+     * @throws IOException Fitxategia kargatzean errorea gerta daiteke.
+     */
     private void switchToSecondary() throws IOException {
         App.setRoot("hasiera");
     }
 
-    // Erremintaren bideak erakutsi
+    /**
+     * Jokoaren mapa bistaratzen du, erremintaren bideak erakutsiz.
+     */
     public void displayPath() {
         for (int i = 0; i < Config.BOARD_SIZE; i++) {
             for (int j = 0; j < Config.BOARD_SIZE; j++) {
@@ -130,35 +143,51 @@ public class JolasaController {
             }
         }
     }
-
+/**
+ * eskailera sortu eta kokatzen du 7,7 kasillan.
+ */
     public void createEscalera() {
         escalera = new Escalera();
         borrokaEremua.add(escalera, 7, 7);
 
     }
 
-    // Pikachu objetua sortu eta kokatu
+    /**
+     * Pikachu objektua sortu eta kokatzen du.
+     */
     public void createAndPlacePikachu() {
         pikachu = new Pikachu();
         borrokaEremua.add(pikachu, 0, 0);
 
     }
 
+    /**
+     * Duskull objektua sortu eta kokatzen du.
+     */
     public void createAndPlaceDuskull() {
         duskull = new Duskull(borrokaEremua);
 
     }
 
+    /**
+     * Gengar objektua sortu eta kokatzen du.
+     */
     public void createAndPlaceGengar() {
         gengar = new Gengar();
         borrokaEremua.add(gengar, 4, 4);
     }
 
+    /**
+     * HAunter objektua sortu eta kokatzen du.
+     */
     public void createAndPlaceHaunter() {
         haunter = new Haunter();
         borrokaEremua.add(haunter, 5, 2);
     }
 
+    /**
+     * Haunter pertsonaia animatzen hasten du.
+     */
     private void startHaunterAnimation() {
         haunterTimeline = new Timeline(
                 new KeyFrame(Duration.seconds(0.25), e -> moveHaunter(1)));
@@ -167,11 +196,10 @@ public class JolasaController {
     }
 
     /**
-     * Duskulla berantza mugitzen dua
+     * Haunter pertsonaia mugitzeko metodoa.
      * 
-     * @param deltaY
+     * @param deltaX Mugimenduaren distantzia.
      */
-
     public void moveHaunter(double deltaX) {
         Integer currentX = GridPane.getColumnIndex(haunter);
         Integer currentY = GridPane.getRowIndex(haunter);
@@ -188,7 +216,9 @@ public class JolasaController {
             GridPane.setColumnIndex(haunter, 0);
         }
     }
-
+/**
+     * Gengar pertsonaia animatzen hasten du.
+     */
     private void startGengarAnimation() {
         gengarTimeline = new Timeline(
                 new KeyFrame(Duration.seconds(0.35), e -> moveGengar(1)));
@@ -197,7 +227,7 @@ public class JolasaController {
     }
 
     /**
-     * Duskulla berantza mugitzen du
+     * Gengar  mugitzen du
      * 
      * @param deltaY
      */
@@ -231,6 +261,13 @@ public class JolasaController {
         }
     }
 
+    /**
+     * Pikachu mugitzen du erabilitako teklaren arabera.
+     * 
+     * @param deltaX Mugimendua X ardatzean.
+     * @param deltaY Mugimendua Y ardatzean.
+     * @throws Exception Salbuespena gerta daiteke kolisioetan.
+     */
     public void movePikachu(double deltaX, double deltaY) throws Exception {
         // Pikachu posizioa lortu
         Integer currentX = GridPane.getColumnIndex(pikachu);
@@ -274,7 +311,9 @@ public class JolasaController {
             }
         }
     }
-
+/**
+     * Pikapika irudia erakusteko metodoa.
+     */
     private void createPikapikaStage() {
         pikapikaStage = new Stage();
         pikapikaStage.initModality(Modality.APPLICATION_MODAL);
@@ -285,7 +324,9 @@ public class JolasaController {
     }
 
     // ...
-
+ /**
+     * Bideoa erakusteko metodoa.
+     */
     private void showPikapikaImage() {
         try {
 
@@ -293,7 +334,7 @@ public class JolasaController {
             Group root = (Group) currentScene.getRoot();
 
             StackPane pikapikaPane = (StackPane) pikapikaStage.getScene().getRoot();
-            pikapikaPane.getChildren().clear(); 
+            pikapikaPane.getChildren().clear();
             pikapikaPane.getChildren().add(new ImageView(new Image("pikapika.png")));
 
             pikapikaStage.setFullScreen(true);
@@ -315,7 +356,10 @@ public class JolasaController {
 
         }
     }
-
+/**
+     * Jokoaren bigarren eszena kargatzen du.
+     * @throws IOException Eszena kargatzean errorea gerta daiteke.
+     */
     @FXML
 
     public void start() throws IOException {
@@ -326,57 +370,55 @@ public class JolasaController {
     private void checkEscaleraCollision(int pikachuX, int pikachuY) {
         Integer escaleraX = GridPane.getColumnIndex(escalera);
         Integer escaleraY = GridPane.getRowIndex(escalera);
-    
+
         if (escaleraX == null || escaleraY == null) {
             escaleraX = 7;
             escaleraY = 7;
         }
-    
+
         if (pikachuX == escaleraX && pikachuY == escaleraY) {
             System.out.println("🎉 Pikachu eskailerara iritsi da!. Denbora gordetzen eta eszenaz aldatzen...");
-    
+
             // Denbora gorde
             long tiempoFinal = System.currentTimeMillis();
             tiempoTranscurrido = (tiempoFinal - tiempoInicio) / 1000.0; // Segundotan jarri
-    
+
             // Denbora datubasera
             DatabaseManager.guardarTiempo(nombreUsuario, tiempoTranscurrido);
             System.out.println("✅ Tiempo guardado en la base de datos: " + tiempoTranscurrido + "s");
-    
+
             // Eszena aldatu
             showVideo();
         }
     }
-    
-    
 
     private void cambiarAEscenaFinal() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dambat/fxml/escenaFinal.fxml"));
             Parent root = loader.load();
-    
+
             FinalController finalController = loader.getController();
             if (finalController != null) {
                 finalController.mostrarRanking(nombreUsuario, tiempoTranscurrido);
             } else {
                 System.out.println("❌ ERROREA: FinalController ez da inizializatu.");
             }
-    
+
             Stage stage = (Stage) borrokaEremua.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Puntuazioa");
             stage.setFullScreen(true);
             stage.show();
-    
+
             System.out.println("✅ Azken eszenara aldatu da.");
         } catch (IOException e) {
             System.out.println("❌ ERROREA: Ezin izan da azken eszena kargatu.");
             e.printStackTrace();
         }
     }
-    
-
-
+ /**
+     * Jokoaren egoera berrezartzen du.
+     */
     private void resetGame() {
         pikapikaStage.hide();
 
@@ -400,7 +442,10 @@ public class JolasaController {
         startGengarAnimation();
         startHaunterAnimation();
     }
-
+/**
+     * Erabiltzailearen izena ezartzen du eta pantailan bistaratzen du.
+     * @param nombre Erabiltzailearen izena.
+     */
     public void setNombre(String nombre) {
         this.nombreUsuario = nombre; // AIzena gordetzen dela ziurtatu
         if (nombreLabel != null) {
@@ -408,7 +453,7 @@ public class JolasaController {
         }
         System.out.println("🟢 Erabiltzaile izena jarrits: " + nombreUsuario);
     }
-    
+
     private void showVideo() {
         try {
             // Bideoa kargatu (bide erlatiboa erabili)
@@ -417,68 +462,68 @@ public class JolasaController {
             Media media = new Media(videoPath);
             MediaPlayer mediaPlayer = new MediaPlayer(media); // Usar una variable de instancia
             MediaView mediaView = new MediaView(mediaPlayer);
-    
+
             // Bideoa pantaila osoan erakutsi
             mediaView.setPreserveRatio(false); // Bideoa pantaila osoan egokitzeko
-    
+
             // Bideoa erakusteko Stage berria sortu
             Stage videoStage = new Stage();
             videoStage.initModality(Modality.APPLICATION_MODAL);
             videoStage.setFullScreen(true);
-    
+
             // Bideoaren tamaina Stage-aren tamainara egokitu
             mediaView.fitWidthProperty().bind(videoStage.widthProperty()); // Zabalera egokitu
             mediaView.fitHeightProperty().bind(videoStage.heightProperty()); // Altuera egokitu
-    
+
             // Saltatzeko botoia sortu (hasieratik ikusgai)
             Button skipButton = new Button("SALTATU");
             skipButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white; -fx-font-size: 20px;");
             skipButton.setVisible(true); // Hasieratik ikusgai
-    
+
             // Botoia klikatzean eszena aldatu (bideoa ez da geldituko)
             skipButton.setOnAction(e -> {
                 mediaPlayer.stop(); // Bideoa gelditu
                 videoStage.close(); // Leihoa itxi
                 cambiarAEscenaFinal(); // Eszena aldatu
             });
-    
+
             // Bideoa amaitu ondoren eszena aldatu
             mediaPlayer.setOnEndOfMedia(() -> {
                 videoStage.close(); // Leihoa itxi
                 cambiarAEscenaFinal(); // Eszena aldatu
             });
-    
+
             // Depuración: Listeners para errores y estados
             mediaPlayer.setOnError(() -> {
                 System.err.println("❌ ERROREA: Bideoa erreproduzitzen.");
                 System.err.println("Errorea: " + mediaPlayer.getError().getMessage());
             });
-    
+
             mediaPlayer.setOnPlaying(() -> {
                 System.out.println("▶️ Bideoa erreproduzitzen.");
             });
-    
+
             mediaPlayer.setOnStopped(() -> {
                 System.out.println("⏹️ Bideoa gelditu da.");
             });
-    
+
             mediaPlayer.setOnReady(() -> {
                 System.out.println("✅ Bideoa kargatuta eta prest.");
             });
-    
+
             // Bideoa eta botoia erakusteko layouta sortu (AnchorPane erabiliz)
             AnchorPane root = new AnchorPane();
             root.getChildren().addAll(mediaView, skipButton);
-    
+
             // Botoia eskubian eta behean kokatu
             AnchorPane.setBottomAnchor(skipButton, 20.0); // Behean
             AnchorPane.setRightAnchor(skipButton, 20.0); // Eskubian
-    
+
             // Scene eta Stage konfiguratu
             Scene scene = new Scene(root, Color.BLACK);
             videoStage.setScene(scene);
             videoStage.show();
-    
+
             // Bideoa erreproduzitu
             mediaPlayer.play();
         } catch (Exception e) {
@@ -486,7 +531,14 @@ public class JolasaController {
             e.printStackTrace();
         }
     }
+
     // Teklatu ekintzak kudeatzeko metodoa
+    /**
+     * Teklatuko ekintzak kudeatzen ditu.
+     * 
+     * @param event Teklatuaren ekintza.
+     * @throws Exception Balizko erroreak kudeatzeko.
+     */
     private void handleKeyPress(KeyEvent event) throws Exception {
         // Sakatutako tekla lortu
         KeyCode keyCode = event.getCode();

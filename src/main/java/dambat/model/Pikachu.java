@@ -7,7 +7,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-
+/**
+ * Pikachu klasea, jokalariaren pertsonaia adierazten du.
+ */
 public class Pikachu extends ImageView {
 
     int bizitzak = 3;

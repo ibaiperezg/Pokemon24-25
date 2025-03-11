@@ -1,10 +1,8 @@
 package dambat.controller;
 
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.List;
-
 import dambat.database.DatabaseManager;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
@@ -17,6 +15,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+/**
+ * FinalController klasea jokoaren azken pantaila kudeatzen du.
+ */
 public class FinalController {
 
     @FXML
@@ -29,12 +30,12 @@ public class FinalController {
     private Button exitButton; // Jokotik irteteko botoia
 
     @FXML
-    private TextArea rankingArea;
+    private TextArea rankingArea; // Ranking-a erakusten duen testu area
 
     /**
      * Eszena kargatzen denean exekutatzen da.
+     * Ranking-a bistaratzen du eta puntuazioaren efektu bisual bat gehitzen du.
      */
-
     @FXML
     public void initialize() {
         Node scrollPane = rankingArea.lookup(".scroll-pane");
@@ -44,6 +45,7 @@ public class FinalController {
         }
         mostrarRanking(null, 0);
         System.out.println("📊 Rankinga rekuperatzen...");
+        
         // Parpadeo moduko animazioa Puntuazioan
         FadeTransition fadeAnimation = new FadeTransition(Duration.seconds(1.5), player1Score);
         fadeAnimation.setFromValue(0.5);
@@ -60,7 +62,6 @@ public class FinalController {
     @FXML
     private void restartGame() {
         try {
-            
             String rutaFXML = "/dambat/fxml/escenaNombre.fxml"; 
             System.out.println("🔎 Eszena kargatzen hemendik: " + getClass().getResource(rutaFXML));
 
@@ -100,6 +101,13 @@ public class FinalController {
         stage.close(); // Uneko leihoa itxi
     }
 
+    /**
+     * Ranking-a bistaratzeko metodoa.
+     * Jokalariaren denbora erakusten du eta 5 denbora onenen zerrenda erakusten du.
+     * 
+     * @param nombreJugador Jokalarien izena.
+     * @param tiempoJugador Jokalarien denbora segundotan.
+     */
     public void mostrarRanking(String nombreJugador, double tiempoJugador) {
         // 5 denbora onenak jaso
         List<String> topTiempos = DatabaseManager.obtenerTopTiempos();
@@ -109,7 +117,7 @@ public class FinalController {
     
         StringBuilder rankingText = new StringBuilder();
         
-        // 1Oraingo jokalariaren denbora
+        // Oraingo jokalariaren denbora
         rankingText.append("🕒 ZURE DENBORA: ").append(nombreJugador).append(" - ").append(tiempoJugador).append("s\n\n");
     
         // Ranking generala
@@ -127,6 +135,4 @@ public class FinalController {
     
         rankingArea.setText(rankingText.toString());
     }
-    
-
 }

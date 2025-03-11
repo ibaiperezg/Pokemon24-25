@@ -6,7 +6,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-
+/**
+ * Terrain klasea, jokoaren lurraldea adierazten du.
+ */
 public class Terrain extends ImageView {
     
    
