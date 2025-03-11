@@ -81,9 +81,8 @@ Behean proiektuaren klase egitura ikus daiteke:
 #### **DatabaseManager** (Datu-basearen kudeatzailea)
 ```java
 - URL: String
-+ createTable()
++ createTables()
 + verificarBaseDeDatos()
-+ createRankingTable()
 + saveName(String nombre)
 + getLastSavedName()
 + guardarTiempo(String nombre, double tiempo)
@@ -109,9 +108,9 @@ Behean proiektuaren klase egitura ikus daiteke:
       | JolasaController|<------------------|  DatabaseManager |
       +----------------+                   +------------------+
       | - initialize()  |                   | - URL: String    |
-      | + jolastenHasi()|                   | + createTable()  |
+      | + jolastenHasi()|                   | + createTables()  |
       | + displayPath()  |                   | + verificarBaseDeDatos() |
-      | + createEscalera()|                  | + createRankingTable() |
+      | + createEscalera()|                  | |
       | + createAndPlacePikachu()|           | + saveName(String nombre) |
       | + createAndPlaceDuskull()|           | + getLastSavedName() |
       | + createAndPlaceGengar()|            | + guardarTiempo(String nombre, double tiempo) |
@@ -217,34 +216,6 @@ Gorago aipatutako UML diagramak JavaFX bidezko joko baten egitura eta klase harr
 
 
 
-
-
-📜 Metodo Guztien Azalpena
-
-🎮 JolasaController metodoak
-
-initialize() → Jokoa hastean elementuak sortzen ditu.
-
-jolastenHasi() → Jokoa abiarazten du eta kronometroa martxan jartzen du.
-
-displayPath() → Bide egokia erakusten du grid batean.
-
-createEscalera() → Eskaileraren objektua sortzen du.
-
-createAndPlacePikachu() → Pikachu objektua sortu eta kokatzen du.
-
-createAndPlaceDuskull() → Duskull objektua sortzen du.
-
-createAndPlaceGengar() → Gengar objektua sortu eta grid-ean kokatzen du.
-
-createAndPlaceHaunter() → Haunter objektua sortzen du.
-
-startHaunterAnimation() → Haunter-en mugimendu animazioa hasten du.
-
-moveHaunter(double deltaX) → Haunter mugitzen du.
-
-startGengarAnimation() →
-
 ## ⚙️ Instalazioa eta Exekuzioa
 
 ### 📦 Beharrezko softwarea
@@ -298,9 +269,8 @@ private static final String URL = "jdbc:sqlite:nombres.db";
 
 ### 📜 DatabaseManager metodoak
 
-- **createTable()** → `jugadores` taula sortzen du, existitzen ez bada.
+- **createTables()** → `jugadores` taulak sortzen ditu, existitzen ez badira.
 - **verificarBaseDeDatos()** → Datu-baseko taulak zerrendatzen ditu kontsolan.
-- **createRankingTable()** → `ranking` taula sortzen du, existitzen ez bada.
 - **saveName(String nombre)** → Jokalariaren izena datu-basean gordetzen du.
 - **getLastSavedName()** → Azken gordetako izena berreskuratzen du.
 - **guardarTiempo(String nombre, double tiempo)** → Jokalariaren denbora datu-basean gordetzen du.
