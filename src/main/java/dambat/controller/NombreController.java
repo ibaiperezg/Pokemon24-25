@@ -26,8 +26,8 @@ public class NombreController {
     @FXML
 public void initialize() {
     // Datubasea sortu ez baldinbada existitzen
-    DatabaseManager.createTable(); // Taula dagoen ziurtatu
-    DatabaseManager.createRankingTable(); // ranking taula dagoela ziurtatu
+    DatabaseManager.createTables(); // Taula dagoen ziurtatu
+     // ranking taula dagoela ziurtatu
 
     // Gordetako azken izena kargatu
     String savedName = DatabaseManager.getLastSavedName();

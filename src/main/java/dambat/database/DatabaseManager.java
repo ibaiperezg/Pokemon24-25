@@ -9,20 +9,39 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DatabaseManager klasea SQLite datu-basearekin elkarreragiteko.
+ */
 public class DatabaseManager {
     private static final String URL = "jdbc:sqlite:nombres.db";
 
-    // Datu-basea sortu, existitzen ez bada
-    public static void createTable() {
+    /**
+     * Datu-baseko taula guztiak sortzen ditu, existitzen ez badira.
+     */
+    public static void createTables() {
         try (Connection conn = DriverManager.getConnection(URL);
-                PreparedStatement stmt = conn.prepareStatement(
-                        "CREATE TABLE IF NOT EXISTS jugadores (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT)")) {
-            stmt.execute();
+             Statement stmt = conn.createStatement()) {
+            
+            // 'jugadores' taula sortu
+            String jugadoresTable = "CREATE TABLE IF NOT EXISTS jugadores (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT)";
+            stmt.execute(jugadoresTable);
+            
+            // 'ranking' taula sortu
+            String rankingTable = "CREATE TABLE IF NOT EXISTS ranking ("
+                                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                + "nombre TEXT NOT NULL, "
+                                + "tiempo REAL NOT NULL)";
+            stmt.execute(rankingTable);
+            
+            System.out.println("✅ Taulak behar bezala sortu dira.");
         } catch (SQLException e) {
-            System.out.println("❌ ERROREA datu-basea sortzean: " + e.getMessage());
+            System.out.println("❌ ERROREA taulak sortzean: " + e.getMessage());
         }
     }
 
+    /**
+     * Datu-baseko existitzen diren taulak erakusten ditu.
+     */
     public static void verificarBaseDeDatos() {
         String sql = "SELECT name FROM sqlite_master WHERE type='table'";
         
@@ -39,21 +58,10 @@ public class DatabaseManager {
         }
     }
     
-    public static void createRankingTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS ranking ("
-                   + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                   + "nombre TEXT NOT NULL, "
-                   + "tiempo REAL NOT NULL)";
-        try (Connection conn = DriverManager.getConnection(URL);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-            System.out.println("✅ 'ranking' taula egiaztatu edo behar bezala sortu da.");
-        } catch (SQLException e) {
-            System.out.println("❌ ERROREA 'ranking' taula sortzean: " + e.getMessage());
-        }
-    }
-    
-    // Izena datu-basean gorde
+    /**
+     * Izena 'jugadores' taulan gordetzen du.
+     * @param nombre Gordeko den izena.
+     */
     public static void saveName(String nombre) {
         try (Connection conn = DriverManager.getConnection(URL);
                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO jugadores (nombre) VALUES (?)")) {
@@ -65,7 +73,10 @@ public class DatabaseManager {
         }
     }
 
-    // Azken gordetako izena berreskuratu
+    /**
+     * Azken gordetako izena berreskuratzen du.
+     * @return Azken izena edo null errore bat gertatuz gero.
+     */
     public static String getLastSavedName() {
         try (Connection conn = DriverManager.getConnection(URL);
                 PreparedStatement stmt = conn.prepareStatement("SELECT nombre FROM jugadores ORDER BY id DESC LIMIT 1");
@@ -79,7 +90,11 @@ public class DatabaseManager {
         return null;
     }
 
-    // **Denbora datu-basean gorde**
+    /**
+     * Jokalarien denborak 'ranking' taulan gordetzen ditu.
+     * @param nombre Jokalariaren izena.
+     * @param tiempo Lortutako denbora segundotan.
+     */
     public static void guardarTiempo(String nombre, double tiempo) {
         String sql = "INSERT INTO ranking (nombre, tiempo) VALUES (?, ?)";
         try (Connection conn = DriverManager.getConnection(URL);
@@ -93,7 +108,10 @@ public class DatabaseManager {
         }
     }
 
-    // **5 denbora onenak lortu ordenatuta**
+    /**
+     * 5 denbora onenak ordenatuta itzultzen ditu.
+     * @return Jokalarien izenak eta denborak dituen zerrenda.
+     */
     public static List<String> obtenerTopTiempos() {
         List<String> topTiempos = new ArrayList<>();
         String sql = "SELECT nombre, tiempo FROM ranking ORDER BY tiempo ASC LIMIT 5";
