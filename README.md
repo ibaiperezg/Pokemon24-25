@@ -257,8 +257,8 @@ startGengarAnimation() →
 
 1. Proiektua klonatu edo deskargatu:
    ```sh
-   git clone https://github.com/erabiltzailea/pikachu-jokoa.git
-   cd pikachu-jokoa
+   git clone https://github.com/ibaiperezg/Pokemon24-25.git
+   cd Pokemon24-25
    ```
 2. Maven bidez exekutatu:
    ```sh
@@ -340,13 +340,7 @@ private static final String URL = "jdbc:sqlite:nombres.db";
 - **Maven** → Menpekotasunen kudeaketa eta konpilazioa
 - **SQLite** → Datu-basea denbora gordetzeko
 
----
 
-## 📌 Etorkizuneko Hobekuntzak
-
-✅ Maila gehiago gehitu 🎯 ✅ Diseinu grafiko eta animazio hobetuak 🎨 ✅ Etsai eta oztopo gehiago gehitu 🕹️ ✅ Jokalari anitzeko modua garatu 👥 ✅ Soinu efektuak gehitu 🎵
-
----
 
 ## 🎮 Jokoaz gozatu!
 
