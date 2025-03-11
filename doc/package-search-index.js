@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"dambat","l":"dambat"},{"m":"dambat","l":"dambat.controller"},{"m":"dambat","l":"dambat.database"},{"m":"dambat","l":"dambat.model"}];updateSearchResults();
